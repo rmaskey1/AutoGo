@@ -139,11 +139,9 @@ label {
 
 #map {
     display: flex;
-    top: 24%;
+    top: 30%;
     left: 9%;
     align-items: center;
     justify-content: space-between;
     position: absolute;
-    height: 50%;
-    width: 33%;
 }
