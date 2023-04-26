@@ -71,6 +71,28 @@
       ?>
 
 
+                  <form id="orderdelete" name="orderdelete" method="post" action="deleteorder2.php">
+                    <div id="orderdelete">
+                              <!--<form method="post" action="accountDeleted.php">-->
+                                  <h3>Reservation List:</h3>
+                                  Select a reservation to cancel
+                                  <BR>
+                                  <select name="orderdelete">
+
+                                    <?php
+                                    $conn = mysqli_connect("localhost", "root", "", "autogo");
+                                    $sql = "SELECT * FROM `reservations` WHERE `username`='$username'  ";
+                                    $result = $conn->query($sql);
+                                    foreach($result as $row){?>
+                                      <option value="<?php echo $row['confirm']; ?>"><?php echo $row['confirm']; ?></option>
+                                    <?php }?>
+                                  </select>
+                              <input type="submit" name="delete" value="Cancel this Reservation ">
+                              </div>
+                              </form>
+
+
+
       <div class = "bottomBox">
         <div class = "centerBox3">
           <div class = "centerButtons">
