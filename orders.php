@@ -41,21 +41,27 @@
         $result = $conn->query($sql);
         foreach($result as $row) {
           //echo "<div class ='centerBoxDisplayBalance'>";
-          echo "<BR> customer/username:";
+          echo "<BR> Customer (username): ";
           echo "$row[username]";
-          echo "<BR> Order number:";
+          echo "<BR> Order number: ";
           echo "$row[confirm]";
-          echo "<BR> Date(s):";
-          echo "$row[date]";
-          echo "<BR> Car/License Number:";
+          echo "<BR> Car/Vehicle: ";
           echo "$row[license]";
-          echo "<BR> Options 1:";
+          echo "<BR> Date pickup: ";
+          echo "$row[date]";
+          echo "<BR> Date pickup: ";
+          echo "$row[dateend]";
+          echo "<BR> Location pickup: ";
+          echo "$row[pickup]";
+          echo "<BR> Location return: ";
+          echo "$row[returncar]";
+          echo "<BR> Options 1: ";
           echo "$row[option1]";
-          echo "<BR> Options 2:";
+          echo "<BR> Options 2: ";
           echo "$row[option2]";
-          echo "<BR> Options 3:";
+          echo "<BR> Options 3: ";
           echo "$row[option3]";
-          echo "<BR> Total Order:";
+          echo "<BR> Total Order: ";
           echo "$ $row[total]";
           echo "<BR><BR><BR>";
 

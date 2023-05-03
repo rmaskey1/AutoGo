@@ -6,13 +6,15 @@
     if (isset($_POST["cars"]) && isset($_POST["option1"]))
     {
       $confirm = rand(10000,99999); // random number
+      $confirm = "A".$confirm;
       $license = $_POST["cars"];
       $option1 = $_POST["option1"];
       $pickup = $_POST["pickup"];
       $returncar = $_POST["returncar"];
       $total = 78;
 
-      echo "Order number: A".$confirm;
+      echo "Order number: ".$confirm;
+      echo "<BR>";
       echo "car option: ".$license;
       echo "<BR>";
       echo "insurance option: ".$option1;

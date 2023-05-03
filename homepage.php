@@ -1,14 +1,4 @@
-<?php
-    session_start();
-    if($_POST['pickup'] && $_POST['dropoff']) {
-        $pickUpLocation = $_POST['pickup'];
-        $dropOffLocation = $_POST['dropoff'];
-        echo $pickUpLocation;
-        echo $dropOffLocation;
-    }
-    
-    
-?>
+
 
 <!DOCTYPE html>
 <html>
@@ -44,17 +34,18 @@
             <a href="./contact.html">Contact</a>
             <a href="./contact.html">Contact</a>
         </div>
-        <div class="user_info">
         <?php
-        if(!isset($_SESSION["username"])){
-            echo "<a href='./login.php'>Login</a>
-            <a href='./create.php'>Sign Up</a>";
+        session_start();
+        if (!isset($_SESSION['username'])){
+        echo "<div class='user_info'>
+            <a href='./login.html'>Login</a>
+            <a href='./signup.html'>Sign Up</a>
+        </div>";
         }
         else {
-            echo "<a href='./profile.html'>Profile</a>";
+          echo "Your are logged in already!";
         }
         ?>
-        </div>
     </div>
     <div class="infoContainer">
         <form action="homepage.php" method="post">
@@ -89,7 +80,7 @@
         </form>
 
         <div class="choosecar">
-            <a href="./cars.html">Choose your car!</a>
+            <a href="./transactions2.php">Choose your car!</a>
         </div>
     </div>
     <script>
@@ -102,7 +93,7 @@
             });
         });
     </script>
-    
+
     <div id="map" style="
         height: 50%;
         width: 30%;
@@ -136,7 +127,7 @@
             $('#dropLoc').select2();
         });
     </script>
-    
+
 
 </body>
 </html>
