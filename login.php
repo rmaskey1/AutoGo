@@ -16,11 +16,14 @@
       $_SESSION['username'] = $username;
 
       //create connection
-      $conn = mysqli_connect("localhost", "root", "", "autogo");
+      $conn = mysqli_connect("localhost", "root", "admin", "autogo");
 
       //Check connection
       if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
+      }
+      else {
+        echo "connected";
       }
 
       // select user, check for password
@@ -69,7 +72,7 @@
 <!-- Top of bar box. Designed with CSS flexdispalays.  -->
       <div class = "topBox">
         <div class = "leftBoxL">
-          <button class="toplink"><a href="login.php" id="topcolor">Autogo</a></button>
+          <button class="toplink"><a href="homepage.php" id="topcolor">Autogo</a></button>
         </div>
         <div class = "buttonGroup">
 

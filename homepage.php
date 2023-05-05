@@ -12,12 +12,11 @@
                 header('Location: transactions2.php');
             }
             else {
-                echo "One or more fields incomplete";
+                echo "<p>One or more fields incomplete</p>";
                 header('Location: homepage.php');
             }
         }
         else {
-            echo "nope nope";
             header('Location: homepage.php');
         }
     }
@@ -58,7 +57,6 @@
             <a href="./contact.html">Contact</a>
         </div>
         <?php
-        session_start();
         if (!isset($_SESSION['username'])){
         echo 
             "<div class='user_info'>
@@ -105,11 +103,9 @@
                 <label><br>Rental Dates: <input type="text" name="rentRange"/></label>
             </fieldset>
             <div class="choosecar">
-            <button type="submit" name='sub'>Choose your car!</button>
-        </div>
+                <button type="submit" name='sub'>Choose your car!</button>
+            </div>
         </form>
-
-       
     </div>
     <script>
         $(function(){

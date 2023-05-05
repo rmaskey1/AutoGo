@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="homepage.css"/>
+    <link rel="stylesheet" type="text/css" href="transactions2.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/vendor/daterangepicker/daterangepicker.css">
     <!-- JQuery -->
@@ -27,7 +27,7 @@
     <div class="bg_img"></div>
     <div class="navbar">
         <div class="logo">
-            <img src="./img/autogo_logo.png" alt="logo"/>
+            <img src="autogo_logo.png" alt="logo"/>
         </div>
         <div class="nav">
             <a href="./contact.html">Contact</a>

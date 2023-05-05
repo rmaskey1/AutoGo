@@ -23,7 +23,7 @@
 
         <div class = "buttonGroup">
           <div class = "rightBoxR">
-            <button class="toplink"><a href="index.php" id="topcolor">Logout</a></button>
+            <button class="toplink"><a href="login.php" id="topcolor">Logout</a></button>
           </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
             // checks username, and puts the table row into variables
             // prints out
               {
-                $conn = mysqli_connect("localhost", "root", "", "autogo");
+                $conn = mysqli_connect("localhost", "root", "admin", "autogo");
                 $sql = "SELECT * FROM `users` WHERE `username`='$username'  ";
                 $result = $conn->query($sql);
                 //$_SESSION['username']=$username;
