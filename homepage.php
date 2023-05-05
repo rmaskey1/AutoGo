@@ -1,4 +1,27 @@
-
+<?php
+    $pickup = null;
+    $dropoff = null;
+    $rentRange = null;
+    if(isset($_POST['sub'])) {
+        if( isset($_POST['pickup']) || isset($_POST['dropoff']) || isset($_POST['rentRange'])) {
+            $pickup = $_POST['pickup'];
+            $dropoff = $_POST['dropoff'];
+            $rentRange = $_POST['rentRange'];
+            echo "<p>hi</p>";
+            if($pickup && $dropoff && $rentRange) {
+                header('Location: transactions2.php');
+            }
+            else {
+                echo "One or more fields incomplete";
+                header('Location: homepage.php');
+            }
+        }
+        else {
+            echo "nope nope";
+            header('Location: homepage.php');
+        }
+    }
+?>
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +50,7 @@
     <div class="bg_img"></div>
     <div class="navbar">
         <div class="logo">
-            <img src="./img/autogo_logo.png" alt="logo"/>
+            <img src="autogo_logo.png" alt="logo"/>
         </div>
         <div class="nav">
             <a href="./contact.html">Contact</a>
@@ -37,13 +60,17 @@
         <?php
         session_start();
         if (!isset($_SESSION['username'])){
-        echo "<div class='user_info'>
-            <a href='./login.html'>Login</a>
-            <a href='./signup.html'>Sign Up</a>
-        </div>";
+        echo 
+            "<div class='user_info'>
+            <a href='./login.php'>Login</a>
+            <a href='./create.php'>Sign Up</a>
+            </div>";
         }
         else {
-          echo "Your are logged in already!";
+          echo 
+            "<div class='user_info'>
+            <a href='./accountInfo.php'>Profile</a>
+            </div>";
         }
         ?>
     </div>
@@ -55,7 +82,7 @@
                 </legend>
                 <label for="pickLoc">Pick-up Location:</label>
                 <select id="pickLoc" style="width:350px" name="pickup">
-                    <option value="" disabled selected hidden>Choose a pick up location</option>
+                    <option value="" disabled selected hidden></option>
                     <option value="San Francisco International Airport">San Francisco International Airport</option>
                     <option value="San Francisco International Airport">San Jose International Airport</option>
                     <option value="San Francisco International Airport">Los Angeles International Airport</option>
@@ -66,7 +93,7 @@
                 </select>
                 <label for="dropLoc"><br>Drop-off Location:</label>
                 <select id="dropLoc" style="width:350px" name="dropoff">
-                    <option value="" disabled selected hidden>Choose a pick up location</option>
+                    <option value="" disabled selected hidden></option>
                     <option value="San Francisco International Airport">San Francisco International Airport</option>
                     <option value="San Francisco International Airport">San Jose International Airport</option>
                     <option value="San Francisco International Airport">Los Angeles International Airport</option>
@@ -77,11 +104,12 @@
                 </select>
                 <label><br>Rental Dates: <input type="text" name="rentRange"/></label>
             </fieldset>
+            <div class="choosecar">
+            <button type="submit" name='sub'>Choose your car!</button>
+        </div>
         </form>
 
-        <div class="choosecar">
-            <a href="./transactions2.php">Choose your car!</a>
-        </div>
+       
     </div>
     <script>
         $(function(){
