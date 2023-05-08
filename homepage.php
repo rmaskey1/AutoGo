@@ -1,15 +1,15 @@
 <?php
     //Checking to see that all fields are filled before proceeding to next page
     if(isset($_POST['sub'])) {
-        if( isset($_POST['pickup']) || isset($_POST['dropoff']) || isset($_POST['rentRange'])) {
+        if( isset($_POST['pickup']) || isset($_POST['dropoff']) || isset($_POST['rentRange']) ) {
             $pickup = $_POST['pickup'];
             $dropoff = $_POST['dropoff'];
             $rentRange = $_POST['rentRange'];
             if($pickup && $dropoff && $rentRange) {
                 $_SESSION['pickupLocation'] = $pickup;
                 $_SESSION['dropoffLocation'] = $dropoff;
-                $_SESSION['pickupDate'] = explode(" - ", $rentRange);
-                $_SESSION['dropoffDate'] = explode(" - ", $rentRange);
+                $_SESSION['pickupDate'] = explode(" - ", $rentRange)[0];
+                $_SESSION['dropoffDate'] = explode(" - ", $rentRange)[1];
                 header('Location: transactions2.php');
             }
             else {

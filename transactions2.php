@@ -15,10 +15,10 @@
       echo '<p> Seats: '.($row['seats']).'</p>';
       echo '<p> MPG: '.($row['mpg']).'</p>';
       echo '<p> Price: $'.($row['price']).'/day</p>';
-      echo '<button name="'.($row['license']).'">Rent</button>';
+      echo "<button onclick='window.location.href=\"transactions3.php?price=".$row["price"]."&".$row["model"]."\"'>Rent this car</button>";
     }
   }
-
+/*
   $sql2 = "SELECT license FROM autogo.cars";
   $result = mysqli_query($conn, $sql2);
   while($row = mysqli_fetch_assoc($result)) {
@@ -30,6 +30,7 @@
       header('Location: transaction3.php');
     }
   }
+*/
 ?>
 
 <!DOCTYPE html>
@@ -120,12 +121,12 @@
         </div>
       </div>
     </div>
-      -->
+      
 
-    <!-- insurance picture -->
+     insurance picture 
     <img src = "insurance.png">
 
-    <!--  Forms for creating reservation  -->
+     Forms for creating reservation  
 
     <form action="/AutoGo/transactions3.php" method="post">
       Select your car:
@@ -165,7 +166,7 @@
         <option value="Sacremento">Sacremento</option>
         <option value="San Diego">San Diego</option>
       </select>
-
+      -->
 
 
 
@@ -217,11 +218,11 @@
                     maxlength="50"
                     required/>
         </div><br>
-      -->
+      
         <div class = "boxcenter">
           <input type="submit" value="Submit">
         </div>
     </form>
-
+-->
 </body>
 </html>
