@@ -1,18 +1,18 @@
 <?php
-    $pickup = null;
-    $dropoff = null;
-    $rentRange = null;
+    //Checking to see that all fields are filled before proceeding to next page
     if(isset($_POST['sub'])) {
         if( isset($_POST['pickup']) || isset($_POST['dropoff']) || isset($_POST['rentRange'])) {
             $pickup = $_POST['pickup'];
             $dropoff = $_POST['dropoff'];
             $rentRange = $_POST['rentRange'];
-            echo "<p>hi</p>";
             if($pickup && $dropoff && $rentRange) {
+                $_SESSION['pickupLocation'] = $pickup;
+                $_SESSION['dropoffLocation'] = $dropoff;
+                $_SESSION['pickupDate'] = explode(" - ", $rentRange);
+                $_SESSION['dropoffDate'] = explode(" - ", $rentRange);
                 header('Location: transactions2.php');
             }
             else {
-                echo "<p>One or more fields incomplete</p>";
                 header('Location: homepage.php');
             }
         }
@@ -73,7 +73,7 @@
         ?>
     </div>
     <div class="infoContainer">
-        <form action="homepage.php" method="post">
+        <form name="myForm" action="homepage.php" method="post" onsubmit="return validateForm()">
             <fieldset>
                 <legend>
                     Pick-Up & Drop-Off Information
@@ -103,7 +103,7 @@
                 <label><br>Rental Dates: <input type="text" name="rentRange"/></label>
             </fieldset>
             <div class="choosecar">
-                <button type="submit" name='sub'>Choose your car!</button>
+                <button type="submit" name='sub' id="sub">Choose your car!</button>
             </div>
         </form>
     </div>
@@ -151,7 +151,17 @@
             $('#dropLoc').select2();
         });
     </script>
-
-
+    <!-- Alert if one or more fields are not filled -->
+    <script>
+        function validateForm(){
+            if( document.forms["myForm"]["pickup"].value == '' || document.forms["myForm"]["dropoff"].value == '' || document.forms["myForm"]["rentRange"].value == ''){
+                alert('One or more fields are incomplete!');
+                return false;
+            }
+            else {              
+                return true;
+            }           
+        }
+    </script>
 </body>
 </html>

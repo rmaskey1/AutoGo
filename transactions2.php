@@ -1,4 +1,36 @@
+<?php
 
+  $conn = mysqli_connect("localhost", "root", "admin", "autogo");
+  if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+
+  $sql1 = "SELECT * FROM autogo.cars";
+  $result = mysqli_query($conn, $sql1);
+  while($row = mysqli_fetch_assoc($result)) {
+    if($row['available']=='yes') {
+      echo '<img src="'.($row['img']).'" class="cars"';
+      echo '<p> Model: '.($row['model']).'</p>';
+      echo '<p> Transmission: '.($row['transmission']).'</p>';
+      echo '<p> Seats: '.($row['seats']).'</p>';
+      echo '<p> MPG: '.($row['mpg']).'</p>';
+      echo '<p> Price: $'.($row['price']).'/day</p>';
+      echo '<button name="'.($row['license']).'">Rent</button>';
+    }
+  }
+
+  $sql2 = "SELECT license FROM autogo.cars";
+  $result = mysqli_query($conn, $sql2);
+  while($row = mysqli_fetch_assoc($result)) {
+    $license = $row['license'];
+    echo $license;
+    
+    if(isset($_POST[$license])) {
+      echo $_POST[$license];
+      header('Location: transaction3.php');
+    }
+  }
+?>
 
 <!DOCTYPE html>
 <html>
@@ -38,17 +70,21 @@
         session_start();
         if (!isset($_SESSION['username'])){
         echo "<div class='user_info'>
-            <a href='./login.html'>Login</a>
-            <a href='./signup.html'>Sign Up</a>
-        </div>";
+            <a href='./login.php'>Login</a>
+            <a href='./signup.php'>Sign Up</a>
+            </div>";
         }
         else {
           echo "Your are logged in already!";
         }
         ?>
     </div>
+    <?php
+      
 
-    <!--  Car Selection -->
+    ?>
+
+    <!--  Car Selection 
     <div class="container">
       <div class="team-grid">
         <div id="car1" class="team-card"><img src="images/compositor.jpeg" loading="lazy" srcset="images/compositor-p-500.jpeg 500w, images/compositor-p-800.jpeg 800w, images/compositor-p-1080.jpeg 1080w, images/compositor.jpeg 1440w" sizes="(max-width: 991px) 190px, 268px" alt="" class="team-member-image">
@@ -84,14 +120,14 @@
         </div>
       </div>
     </div>
-
+      -->
 
     <!-- insurance picture -->
     <img src = "insurance.png">
 
     <!--  Forms for creating reservation  -->
 
-    <form action="/transactions3.php" method="post">
+    <form action="/AutoGo/transactions3.php" method="post">
       Select your car:
       <select name="cars" id="cars">
         <option value="Tesla Model 3">Tesla Model 3</option>
