@@ -34,8 +34,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="homepage.css"/>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cardo&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/vendor/daterangepicker/daterangepicker.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One&display=swap" rel="stylesheet">
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- Calendar API -->
@@ -106,7 +113,8 @@
         </div>
     </div>
     <div class="banner">
-        <img src="banner_img.png"/>
+        <h1>Book your ride, hit the road, and let the journey unfold.</h1>
+        <img src="banner_img.png"/>   
     </div>
     <!-- <div class="bg_img"></div> -->
 
@@ -171,7 +179,9 @@
             });
         });
     </script>
-
+    <div class="our-locations">
+        <h1>Our Locations</h1>
+    </div>
     <div id="map" class="map"></div>
     <script>
         var map = L.map('map').setView([37.875255, -120.101326], 5);

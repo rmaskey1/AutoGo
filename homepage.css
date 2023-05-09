@@ -76,8 +76,26 @@ body, html {
     right: 20px;
 }
 
+.banner {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
 .banner img{
     width: 100%;
+}
+
+.banner h1 {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cardo', serif;
+    color: white;
+    font-weight: lighter;
+    font-size: 50px;
+    white-space: nowrap;
 }
 
 label {
@@ -113,6 +131,7 @@ label {
     color:#495057;
     text-decoration: none;
     transition-duration: 0.2s;
+    font-size: 20px;
 }
 
 .choosecar .btn:hover {
@@ -162,7 +181,19 @@ label {
 }
 
 select, input{
-    max-width: 600px;
+    min-width: 800px;
+}
+
+.our-locations {
+    position: relative;
+    top: 45%;
+    text-align: center;
+}
+
+.our-locations h1 {
+    font-family: 'Changa One', cursive;
+    font-size: 60px;
+    color: rgb(255, 52, 52);
 }
 
 .map {
@@ -172,3 +203,4 @@ select, input{
     margin: auto;
     top: 50%;
 }
+
