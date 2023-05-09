@@ -5,7 +5,7 @@ session_start();
     $confirm = rand(10000,99999); // random number
     $confirm = "A".$confirm;
     $_SESSION['confirm'] = $confirm;
-    header('Location: /checkout-page.php');
+    header('Location: ./checkout-page.php');
   }
 ?>
 
@@ -42,7 +42,7 @@ session_start();
         <div class="pricing">
           <div class="_599-mo">$40/per day</div>
         </div>
-        <a href="insurance.php?option1=silver" target="_blank" class="button-6">
+        <a href="./insurance.php?option1=silver" target="_blank" class="button-6">
           <div class="text-4">SELECT</div>
         </a>
       </div>
@@ -71,7 +71,7 @@ session_start();
         <div class="pricing">
           <div class="_599-mo">$50/per day</div>
         </div>
-        <a href="insurance.php?option1=gold" class="button-5">
+        <a href="./insurance.php?option1=gold" class="button-5">
           <div class="text-3">SELECT</div>
         </a>
       </div>
@@ -107,7 +107,7 @@ session_start();
         <div class="pricing">
           <div class="_599-mo">$30/per day</div>
         </div>
-        <a href="insurance.php?option1=bronze" target="_blank" class="button-6">
+        <a href="./insurance.php?option1=bronze" target="_blank" class="button-6">
           <div class="text-4">SELECT</div>
         </a>
       </div>
@@ -126,7 +126,7 @@ session_start();
       </div>
     </div>
   </div>
-  <form method = "POST"><a href="insurance.php?option1=none" class="button-7 w-button">None</a>
+  <form method = "POST"><a href="./insurance.php?option1=none" class="button-7 w-button">None</a>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=641939e3ca3dd150d6a37597" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
