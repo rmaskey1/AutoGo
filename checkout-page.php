@@ -130,7 +130,13 @@
           <BR>Pick up time: <?php echo $_SESSION['date'];?>
           <BR>Drop off time: <?php echo $_SESSION['dateend'];?>
           <BR>Insurance option: <?php echo $_SESSION['option1'];?>
-          <BR>Subtotal: <?php echo "$".$_SESSION['subtotal'].", taxes 9.25%: $".round(($_SESSION['subtotal'])*0.0925,2)?>
+          <BR>Subtotal: <?php echo "$".$_SESSION['subtotal'].", taxes 9.25%: $".round(($_SESSION['subtotal'])*0.0925,2);?>
+          <?php
+          if ($datediff > 6){
+            echo "<BR> 10% discount for renting for 7 or more days at a time!";
+            $_SESSION['total'] = round(($_SESSION['total']), 2);
+          }
+          ?>
           <BR>Total: $<?php echo $_SESSION['total'];?>
 
 

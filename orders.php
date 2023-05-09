@@ -4,6 +4,41 @@
   if (isset($_SESSION['username'])){
     $username = "$_SESSION[username]";
   }
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['orderdelete'])){
+      $selected = $_POST['orderdelete'];
+      $conn = mysqli_connect("localhost", "root", "", "autogo");
+      //$sql = "SELECT balance FROM accounts where account = $selected";
+      $sql = "SELECT * FROM `reservations` WHERE `username`='$username'  ";
+      $results = mysqli_query($conn, $sql);
+      $row = mysqli_fetch_assoc($results);
+
+      //$selected = $_POST['accountdelete'];
+      echo "Order $selected has been deleted!<BR><BR>";
+      $conn = mysqli_connect("localhost", "root", "", "autogo");
+      $sql = "DELETE FROM `reservations` WHERE `confirm` = '$selected'";
+      // convirmation order is confirm. we want to  deleted the $selected
+      $result = $conn->query($sql);
+    }
+
+
+  if (isset($_POST['returncar'])){
+    $returncar = $_POST['returncar'];
+      $conn = mysqli_connect("localhost", "root", "", "autogo");
+      //$sql = "SELECT balance FROM accounts where account = $selected";
+      $sql = "SELECT * FROM `reservations` WHERE `username`='$username'  ";
+      $results = mysqli_query($conn, $sql);
+      $row = mysqli_fetch_assoc($results);
+
+      //$selected = $_POST['accountdelete'];
+      echo "Order $selected has been deleted!<BR><BR>";
+      $conn = mysqli_connect("localhost", "root", "", "autogo");
+      $sql = "DELETE FROM `reservations` WHERE `confirm` = '$selected'";
+      // convirmation order is confirm. we want to  deleted the $selected
+      $result = $conn->query($sql);
+
+    }
+  }
  ?>
 
 
@@ -131,6 +166,44 @@
     </div>
 </div>
 
+<!-- Remove a reservation -->
+<form id="orderdelete" name="orderdelete" method="post" action="./orders.php">
+  <div id="orderdelete">
+      <h3>Reservation List:</h3>
+        Select a reservation to cancel
+        <BR>
+        <select name="orderdelete">
+        <?php
+          $conn = mysqli_connect("localhost", "root", "", "autogo");
+          $sql = "SELECT * FROM `reservations` WHERE `username`='$username'  ";
+          $result = $conn->query($sql);
+          foreach($result as $row){?>
+        <option value="<?php echo $row['confirm']; ?>"><?php echo $row['confirm']; ?></option>
+          <?php }?>
+      </select>
+    <input type="submit" name="delete" value="Cancel this Reservation ">
+  </div>
+</form>
+
+<!-- Remove a reservation -->
+<form id="returncar" name="returncar" method="post" action="./orders.php">
+  <div id="returncar">
+      <h3>Return Car:</h3>
+        Select a car to reeturn
+        <BR>
+        <select name="returncar">
+        <?php
+          $conn = mysqli_connect("localhost", "root", "", "autogo");
+          $sql = "SELECT * FROM `reservations` WHERE `username`='$username'  ";
+          $result = $conn->query($sql);
+          foreach($result as $row){?>
+        <option value="<?php echo $row['confirm']; ?>"><?php echo $row['confirm']; ?></option>
+          <?php }?>
+      </select>
+    <input type="submit" name="returncar" value="Return this car ">
+  </div>
+</form>
+
   <?php
   if (isset($_SESSION['username'])){
             // checks username, and puts the table row into variables
@@ -182,13 +255,21 @@
                   echo    "<th>".$returncar."</th>";
                   echo  "<tr/>";
                   echo  "<tr>";
-                  echo    "<th>Insurance Option: </th>";
+                  echo    "<th>Insurance Option </th>";
                   echo    "<th>".$option1."</th>";
                   echo  "<tr/>";
-                  /*
                   echo  "<tr>";
-                  echo    "<th>Option 2</th>";
-                  echo    "<th>".$option2."</th>";
+                  echo    "<th>Status</th>";
+                  //echo    "<th>".$option2."</th>";
+
+                  if ($option2 == ""){
+                    echo "<th>Preparing reservation</th>";
+                  }
+                  else{
+                    echo    "<th>".$option2."</th>";
+                  }
+
+                  /*
                   echo  "<tr/>";
                   echo  "<tr>";
                   echo    "<th>Option 3</th>";
@@ -206,4 +287,6 @@
                 echo "You are not signed in !";
               }
             ?>
+
+
  </html>
