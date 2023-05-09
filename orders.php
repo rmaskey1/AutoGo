@@ -1,8 +1,30 @@
 <BR><BR><BR><BR><BR><BR><BR>
+
+  <?php
+  session_start();
+  $username = "$_SESSION[username]";
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $selected = $_POST['orderdelete'];
+    $conn = mysqli_connect("localhost", "root", "", "autogo");
+    //$sql = "SELECT balance FROM accounts where account = $selected";
+    $sql = "SELECT * FROM `reservations` WHERE `username`='$username'  ";
+    $results = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($results);
+
+    //$selected = $_POST['accountdelete'];
+    echo "Order $selected has been deleted.<BR>";
+    $conn = mysqli_connect("localhost", "root", "", "autogo");
+    $sql = "DELETE FROM `reservations` WHERE `confirm` = '$selected'";
+    // convirmation order is confirm. we want to  deleted the $selected
+    $result = $conn->query($sql);
+  }
+  ?>
+
+
   Order Summary: <BR>
 <?php
   {
-    session_start();
+
   $username = "$_SESSION[username]";
   $conn = mysqli_connect("localhost", "root", "", "autogo");
   $sql = "SELECT * FROM `reservations` WHERE `username`='$username'  ";
@@ -17,18 +39,20 @@
     echo "$row[license]";
     echo "<BR> Date pickup: ";
     echo "$row[date]";
-    echo "<BR> Date pickup: ";
+    //echo substr($row['date'],0,10);
+    echo "<BR> Date return: ";
     echo "$row[dateend]";
+    //echo substr($row['dateend'],0,10);
     echo "<BR> Location pickup: ";
     echo "$row[pickup]";
     echo "<BR> Location return: ";
     echo "$row[returncar]";
-    echo "<BR> Options 1: ";
+    echo "<BR> Insurance Option: ";
     echo "$row[option1]";
-    echo "<BR> Options 2: ";
-    echo "$row[option2]";
-    echo "<BR> Options 3: ";
-    echo "$row[option3]";
+    //echo "<BR> Options 2: ";
+    //echo "$row[option2]";
+    //echo "<BR> Options 3: ";
+    //echo "$row[option3]";
     echo "<BR> Total Order: ";
     echo "$ $row[total]";
     echo "<BR><BR><BR>";
@@ -45,7 +69,7 @@
 ?>
 
 
-            <form id="orderdelete" name="orderdelete" method="post" action="deleteorder2.php">
+            <form id="orderdelete" name="orderdelete" method="post" action="orders.php">
               <div id="orderdelete">
                         <!--<form method="post" action="accountDeleted.php">-->
                             <h3>Reservation List:</h3>
