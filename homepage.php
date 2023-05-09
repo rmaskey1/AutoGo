@@ -172,7 +172,7 @@
     </div>
     <div id="map" class="map"></div>
     <script>
-        var map = L.map('map').setView([37.875255, -120.101326], 5);
+        var map = L.map('map').setView([37.875255, -120.101326], 6);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,

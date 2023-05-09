@@ -1,6 +1,6 @@
 <?php
-  // this php code checks if user is logged in
   session_start();
+  error_reporting(E_ALL ^ E_WARNING);
   $username = "$_SESSION[username]";
  ?>
 
