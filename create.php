@@ -1,5 +1,14 @@
 <?php
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    /*
+    echo "<BR>username: ".$_POST["userid"];
+    echo "<BR>pass: ".$_POST["pass"];
+    echo "<BR>name: ".$_POST["name"];
+    echo "<BR>last name: ".$_POST["name-2"];
+    echo "<BR>phone: ".$_POST["phone"];
+    echo "<BR>email: ".$_POST["email"];
+    echo "<BR>address: ".$_POST["address"]."<BR>";
+    */
     if (isset($_POST["userid"]) && isset($_POST["pass"]) && isset($_POST["name"]) && isset($_POST["name-2"]) && isset($_POST["phone"]) && isset($_POST["email"]) && isset($_POST["address"]))
     {
       $username = $_POST["userid"];
@@ -24,7 +33,7 @@
 
       if ($results){
         echo "The user has been added.";
-      } else {
+      } else { echo "something went wrong.<BR>";
         echo mysqli_error($conn);
       }
     }
@@ -94,13 +103,13 @@
         </div>
         <div class="form-wrapper w-form">
         <form id="webflow-form" name="webflow-form" data-name="Webflow Form" method="post" action="create.php" class="form-3">
-          <div class="input-wrapper"><label for="email" class="form-block-label">Email</label><input type="Email" class="form-text-input w-input" maxlength="256" name="email" data-name="Name 2" placeholder="Enter your email" id="email"></div>
-          <div class="input-wrapper"><label for="userid" class="form-block-label">UserId</label><input type="text" class="form-text-input w-input" maxlength="256" name="userid" data-name="Name 2" placeholder="Enter a user name" id="userid"></div>
-          <div class="input-wrapper"><label for="pass" class="form-block-label">Password</label><input type="Password" class="form-text-input-2 w-input" maxlength="256" name="pass" data-name="Name" placeholder="Password" id="pass"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"><required/></div>
-          <div class="input-wrapper"><label for="name" class="form-block-label">First Name</label><input type="text" class="form-text-input w-input" maxlength="256" name="name" data-name="Name 2" placeholder="First Name" id="name"></div>
-          <div class="input-wrapper"><label for="name-2" class="form-block-label">Last Name</label><input type="text" class="form-text-input w-input" maxlength="256" name="name-2" data-name="Name" placeholder="Last Name" id="name-2"></div>
-          <div class="input-wrapper"><label for="phone" class="form-block-label">Phone Number</label><input type="phone" class="form-text-input w-input" maxlength="256" name="phone" data-name="Name 2"  id="phone"pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890"></div>
-          <div class="input-wrapper"><label for="address" class="form-block-label">Address</label><input type="Address" class="form-text-input w-input" maxlength="256" name="address" data-name="Name 2" placeholder="Address" id="address"></div>
+          <div class="input-wrapper"><label for="email" class="form-block-label">Email</label><input type="email" class="form-text-input w-input" maxlength="256" name="email" data-name="email" placeholder="Enter your email" id="email"></div>
+          <div class="input-wrapper"><label for="userid" class="form-block-label">UserId</label><input type="userid" class="form-text-input w-input" maxlength="256" name="userid" data-name="userid" placeholder="Enter a user name" id="userid"></div>
+          <div class="input-wrapper"><label for="pass" class="form-block-label">Password</label><input type="pass" class="form-text-input-2 w-input" maxlength="256" name="pass" data-name="pass" placeholder="Password" id="pass"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"><required/></div>
+          <div class="input-wrapper"><label for="name" class="form-block-label">First Name</label><input type="name" class="form-text-input w-input" maxlength="256" name="name" data-name="name" placeholder="First Name" id="name"></div>
+          <div class="input-wrapper"><label for="name-2" class="form-block-label">Last Name</label><input type="name-2" class="form-text-input w-input" maxlength="256" name="name-2" data-name="name-2" placeholder="Last Name" id="name-2"></div>
+          <div class="input-wrapper"><label for="phone" class="form-block-label">Phone Number</label><input type="phone" class="form-text-input w-input" maxlength="256" name="phone" data-name="phone"  id="phone"pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890"></div>
+          <div class="input-wrapper"><label for="address" class="form-block-label">Address</label><input type="address" class="form-text-input w-input" maxlength="256" name="address" data-name="address" placeholder="Address" id="address"></div>
             <div class="input-wrapper"></div><input type="submit" value="Submit" data-wait="Waiting..." class="form-button w-button">
             <a href="login.php" class="button-4 w-button">Already a customer? Click here to Login!</a>
           </form>
