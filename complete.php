@@ -19,7 +19,7 @@
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-    $sql = "INSERT INTO reservations (username, confirm, license, option1, pickup, returncar, total)  VALUES ('$username', '$confirm', '$license', '$option1', '$pickup', '$returncar', '$total' );";
+    $sql = "INSERT INTO reservations (username, confirm, license, option1, pickup, returncar, total, `date`, dateend)  VALUES ('$username', '$confirm', '$license', '$option1', '$pickup', '$returncar', '$total' ,'$date' , '$dateend' );";
     $results = mysqli_query ($conn, $sql);
     if ($results){
       echo "<BR><BR>Your reservation has been created.";
@@ -32,7 +32,7 @@
     echo "There is something missing.<BR>";
   }
 ?>
-<a href="orders.php" class="button-7 w-button">Order Summary</a>
+<BR><a href="orders.php" class="button-7 w-button">Order Summary</a>
 
 <!DOCTYPE html>
 <html>

@@ -12,7 +12,7 @@
     $row = mysqli_fetch_assoc($results);
 
     //$selected = $_POST['accountdelete'];
-    echo "Order $selected has been deleted.<BR>";
+    echo "Order $selected has been deleted!<BR><BR>";
     $conn = mysqli_connect("localhost", "root", "", "autogo");
     $sql = "DELETE FROM `reservations` WHERE `confirm` = '$selected'";
     // convirmation order is confirm. we want to  deleted the $selected
@@ -56,14 +56,6 @@
     echo "<BR> Total Order: ";
     echo "$ $row[total]";
     echo "<BR><BR><BR>";
-
-
-    /*
-    echo "<h1><FONT COLOR=black>Balance: $" . $row["balance"] . ", " .$row["accountname"] . ", xxxx-xxxx-xxxx-" .substr($row["account"],-4);
-    echo "</div>";
-    echo "<div class = 'centerTab'>";
-    echo "</div>";
-    */
   }
 }
 ?>

@@ -31,7 +31,10 @@
     $total =$total + 30*$datediff;
   }
   //echo "Total: ".$total;
+  $_SESSION['subtotal'] = $total;
+  $total = round($total * 1.0925,2);
   $_SESSION['total'] = $total;
+
 
 
 
@@ -116,7 +119,8 @@
           <BR>Pick up time: <?php echo $_SESSION['date'];?>
           <BR>Drop off time: <?php echo $_SESSION['dateend'];?>
           <BR>Insurance option: <?php echo $_SESSION['option1'];?>
-          <BR>Total: <?php echo $_SESSION['total'];?>
+          <BR>Subtotal: <?php echo "$".$_SESSION['subtotal'].", taxes 9.25%: $".round(($_SESSION['subtotal'])*0.0925,2)?>
+          <BR>Total: $<?php echo $_SESSION['total'];?>
 
 
           <!--
