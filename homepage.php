@@ -98,7 +98,11 @@
                     }
                     else {
                     echo
-                        '<li class="mobile-margin-top-12">
+                        '
+                        <li>
+                            <a href="accountInfo.php" class="nav-link-3"><img src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png" style="width: 40px; height: 40px"/></a>
+                        </li>
+                        <li class="mobile-margin-top-12">
                             <a href="./login.php" class="button-2 w-button">Logout</a>
                         </li>';
                     }
@@ -116,22 +120,6 @@
         <h1>Book your ride, hit the road, and let the journey unfold.</h1>
         <img src="banner_img.png"/>   
     </div>
-    <!-- <div class="bg_img"></div> -->
-
-
-    <!--
-    <div class="navbar">
-        <div class="logo">
-            <img src="autogo_logo.png" alt="logo"/>
-        </div>
-        <div class="nav">
-            <a href="./contact.html">Contact</a>
-            <a href="./contact.html">Contact</a>
-            <a href="./contact.html">Contact</a>
-        </div>
-
-    </div>
-    -->
     <div class="info-container">
         <form name="myForm" action="homepage.php" method="post" onsubmit="return validateForm()">
             <div class="form-group">

@@ -1,3 +1,10 @@
+<?php
+  // this php code checks if user is logged in
+  session_start();
+  error_reporting(E_ALL ^ E_WARNING);
+  $username = "$_SESSION[username]";
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,88 +38,92 @@
     <title>AutoGo</title>
 </head>
 <body>
-<div class="navbar-logo-left-2 wf-section">
-        <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-logo-left-container-2 shadow-three w-nav">
-        <div class="container-3">
-            <div class="navbar-wrapper-3">
-            <a href="homepage.php" class="navbar-brand-3 w-nav-brand"><img src="autogo_logo.png" loading="lazy" alt="" class="image-5" style="width: 500px;"></a>
-            <nav role="navigation" class="nav-menu-wrapper-3 w-nav-menu">
-                <ul role="list" class="nav-menu-two-2 w-list-unstyled">
-                <li>
-                    <a href="homepage.php" class="nav-link-3">Home</a>
-                </li>
-                <li>
-                    <a href="about.php" class="nav-link-3">About</a>
-                </li>
-                <?php
-                    if (!isset($_SESSION['username'])){
-                    echo
-                        '<li class="mobile-margin-top-12">
-                            <a href="./login.php" class="button-2 w-button">Login</a>
-                            <a href="./create.php" class="button-2 w-button">Sign Up</a>
-                        </li>';
-                    }
-                    else {
-                    echo
-                        '<li class="mobile-margin-top-12">
-                            <a href="./login.php" class="button-2 w-button">Logout</a>
-                        </li>';
-                    }
-                ?>
-                </ul>
-            </nav>
-            <div class="menu-button-3 w-nav-button">
-                <div class="w-icon-nav-menu"></div>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    <?php
+  <div class="navbar-logo-left-2 wf-section">
+      <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-logo-left-container-2 shadow-three w-nav">
+      <div class="container-3">
+          <div class="navbar-wrapper-3">
+          <a href="homepage.php" class="navbar-brand-3 w-nav-brand"><img src="autogo_logo.png" loading="lazy" alt="" class="image-5" style="width: 500px;"></a>
+          <nav role="navigation" class="nav-menu-wrapper-3 w-nav-menu">
+              <ul role="list" class="nav-menu-two-2 w-list-unstyled">
+              <li>
+                  <a href="homepage.php" class="nav-link-3">Home</a>
+              </li>
+              <li>
+                  <a href="about.php" class="nav-link-3">About</a>
+              </li>
+              <?php
+                  if (!isset($_SESSION['username'])){
+                  echo
+                      '<li class="mobile-margin-top-12">
+                          <a href="./login.php" class="button-2 w-button">Login</a>
+                          <a href="./create.php" class="button-2 w-button">Sign Up</a>
+                      </li>';
+                  }
+                  else {
+                  echo
+                      '
+                      <li>
+                          <a href="accountInfo.php" class="nav-link-3"><img src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png" style="width: 40px; height: 40px"/></a>
+                      </li>
+                      <li class="mobile-margin-top-12">
+                          <a href="./login.php" class="button-2 w-button">Logout</a>
+                      </li>';
+                  }
+              ?>
+              </ul>
+          </nav>
+          <div class="menu-button-3 w-nav-button">
+              <div class="w-icon-nav-menu"></div>
+          </div>
+          </div>
+      </div>
+      </div>
+  </div>
+  <?php
 
-        $objects = get_objects_from_db();
+      $objects = get_objects_from_db();
 
-        foreach ($objects as $object) {
-            echo '<div class="card rounded" style="width: 1000px; margin: 0 auto; float: none; margin-bottom: 30px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);">';
-            echo    '<div class="mx-auto row g-0">';
-            echo       '<div class="col-md-4">';
-            if($object['available']=='yes') {
-            echo          '<img src="'.($object['img']).'" class="img-fluid rounded-start" style="height: 350px; min-width: 475px; border-radius: 4px; margin-left: 50px">';
-            echo     '</div>';
-            echo     '<div class="col-md-8">';
-            echo          '<div class="card-body" style="text-align: center">';
-            echo              '<h3 class="card-title" style="margin-top: 70px; font-weight: bold; margin-left: 200px">'.($object['model']).'</h3>';
-            echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> Transmission: '.($object['transmission']).'</p>';
-            echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> Seats: '.($object['seats']).'</p>';
-            echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> MPG: '.($object['mpg']).'</p>';
-            echo              "<button type='button' style='margin-top: 5px; margin-left: 200px' class='btn btn-danger btn-md' onclick='window.location.href=\"transactions3.php?price=".$object["price"]."&".$object["model"]."\"'>Rent this car</button>";
-            echo          '</div>';
-            echo     '</div>';
-            }
-            echo    '</div>';
-            echo '</div>';
-        }
+      foreach ($objects as $object) {
+          echo '<div class="card rounded" style="width: 1000px; margin: 0 auto; float: none; margin-bottom: 30px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);">';
+          echo    '<div class="mx-auto row g-0">';
+          echo       '<div class="col-md-4">';
+          if($object['available']=='yes') {
+          echo          '<img src="'.($object['img']).'" class="img-fluid rounded-start" style="height: 350px; min-width: 475px; border-radius: 4px; margin-left: 50px">';
+          echo     '</div>';
+          echo     '<div class="col-md-8">';
+          echo          '<div class="card-body" style="text-align: center">';
+          echo              '<h3 class="card-title" style="margin-top: 70px; font-weight: bold; margin-left: 200px">'.($object['model']).'</h3>';
+          echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> Transmission: '.($object['transmission']).'</p>';
+          echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> Seats: '.($object['seats']).'</p>';
+          echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> MPG: '.($object['mpg']).'</p>';
+          echo              "<button type='button' style='margin-top: 5px; margin-left: 200px' class='btn btn-danger btn-md' onclick='window.location.href=\"insurance.php?price=".$object["price"]."&".$object["license"]."\"'>Rent this car</button>";
+          echo          '</div>';
+          echo     '</div>';
+          }
+          echo    '</div>';
+          echo '</div>';
+      }
 
-        function get_objects_from_db() {
-            // Replace with your own database connection code
-            $conn = mysqli_connect("localhost", "root", "admin", "autogo");
-            if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-            }
-            $sql = "SELECT * FROM cars";
-            $result = $conn->query($sql);
-            // Retrieve the objects and return them as an array
-            $objects = array();
-            if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $objects[] = $row;
-            }
-            }
-            $conn->close();
-            return $objects;
-        }
-    ?>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      function get_objects_from_db() {
+          // Replace with your own database connection code
+          $conn = mysqli_connect("localhost", "root", "admin", "autogo");
+          if (!$conn) {
+          die("Connection failed: " . mysqli_connect_error());
+          }
+          $sql = "SELECT * FROM cars";
+          $result = $conn->query($sql);
+          // Retrieve the objects and return them as an array
+          $objects = array();
+          if ($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
+              $objects[] = $row;
+          }
+          }
+          $conn->close();
+          return $objects;
+      }
+  ?>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
