@@ -4,7 +4,7 @@
   if (isset($_GET['price'])&&isset($_GET['model'])) {
     $_SESSION['price'] = $_GET['price'];
     $_SESSION['license'] = $_GET['model'];
-    header('Location: /insurance.php');
+    header('Location: ./insurance.php');
   }
 
 
@@ -23,7 +23,7 @@
       echo '<p> Seats: '.($row['seats']).'</p>';
       echo '<p> MPG: '.($row['mpg']).'</p>';
       echo '<p> Price: $'.($row['price']).'/day</p>';
-      echo "<button onclick='window.location.href=\"transactions2.php?price=".$row["price"]."&model=".$row["model"]."\"'>Rent this car</button>";
+      echo "<button onclick='window.location.href=\"./transactions2.php?price=".$row["price"]."&model=".$row["model"]."\"'>Rent this car</button>";
     }
   }
 ?>
