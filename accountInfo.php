@@ -93,7 +93,7 @@
           <nav role="navigation" class="nav-menu-wrapper-3 w-nav-menu">
             <ul role="list" class="nav-menu-two-2 w-list-unstyled">
               <li>
-                <a href="index.php" class="nav-link-3">Home</a>
+                <a href="homepage.php" class="nav-link-3">Home</a>
               </li>
               <li>
                 <a href="about.php" class="nav-link-3">About</a>
@@ -133,7 +133,7 @@
             // checks username, and puts the table row into variables
             // prints out
               {
-                $conn = mysqli_connect("localhost", "root", "", "autogo");
+                $conn = mysqli_connect("localhost", "root", "admin", "autogo");
                 $sql = "SELECT * FROM `users` WHERE `username`='$username'  ";
                 $result = $conn->query($sql);
                 //$_SESSION['username']=$username;
