@@ -2,6 +2,9 @@
 session_start();
   if (isset($_GET['option1'])) {
     $_SESSION['option1']=$_GET['option1'];
+    $confirm = rand(10000,99999); // random number
+    $confirm = "A".$confirm;
+    $_SESSION['confirm'] = $confirm;
     header('Location: /checkout-page.php');
   }
 ?>

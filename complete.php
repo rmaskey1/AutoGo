@@ -32,6 +32,7 @@
     echo "There is something missing.<BR>";
   }
 ?>
+<a href="orders.php" class="button-7 w-button">Order Summary</a>
 
 <!DOCTYPE html>
 <html>

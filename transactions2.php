@@ -1,79 +1,31 @@
+<BR><BR><BR><BR><BR>
 <?php
-
-  $objects = get_objects_from_db();
-  unset($_POST['sortByPrice']);
-
-  if (isset($_POST['sortByPrice'])) {
-    // Sort the objects by price from least to greatest
-    usort($objects, function($a, $b) {
-      return $a['price'] - $b['price'];
-    });
-    foreach ($objects as $object) {
-      if($object['available']=='yes') {
-        echo '<img src="'.($object['img']).'" class="cars"';
-        echo '<p> Model: '.($object['model']).'</p>';
-        echo '<p> Transmission: '.($object['transmission']).'</p>';
-        echo '<p> Seats: '.($object['seats']).'</p>';
-        echo '<p> MPG: '.($object['mpg']).'</p>';
-        echo '<p> Price: $'.($object['price']).'/day</p>';
-        echo "<button onclick='window.location.href=\"transactions3.php?price=".$object["price"]."&".$object["model"]."\"'>Rent this car</button>";
-      }
-    }
+  session_start();
+  if (isset($_GET['price'])&&isset($_GET['model'])) {
+    $_SESSION['price'] = $_GET['price'];
+    $_SESSION['license'] = $_GET['model'];
+    header('Location: /insurance.php');
   }
 
-  foreach ($objects as $object) {
-    echo '<div class="card mb-3" style="max-width: 540px">';
-    echo    '<div class="row g-0">';
-    echo       '<div class="col-md-4">';
-    if($object['available']=='yes') {
-      echo          '<img src="'.($object['img']).'" class="img-fluid rounded-start" style="height: 200px; width: 400px">';
-      echo     '</div>';
-      echo     '<div class="col-md-8">';
-      echo          '<div class="card-body">';
-      echo              '<h5 class="card-title">'.($object['model']).'</h5>';
-      echo              '<p class="card-text"> Transmission: '.($object['transmission']).'</p>';
-      echo              '<p class="card-text"> Seats: '.($object['seats']).'</p>';
-      echo              '<p class="card-text"> MPG: '.($object['mpg']).'</p>';
-      echo              '<p class="card-text"> Price: $'.($object['price']).'/day</p>';
-      echo              "<button class='btn btn-primary' onclick='window.location.href=\"transactions3.php?price=".$object["price"]."&".$object["model"]."\"'>Rent this car</button>";
-      echo          '</div>';
-      echo     '</div>';
-    }
-    echo    '</div>';
-    echo '</div>';
+
+  $conn = mysqli_connect("localhost", "root", "", "autogo");
+  if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
   }
 
-  function get_objects_from_db() {
-    // Replace with your own database connection code
-    $conn = mysqli_connect("localhost", "root", "admin", "autogo");
-    if (!$conn) {
-      die("Connection failed: " . mysqli_connect_error());
-    }
-    $sql = "SELECT * FROM cars";
-    $result = $conn->query($sql);
-    // Retrieve the objects and return them as an array
-    $objects = array();
-    if ($result->num_rows > 0) {
-      while($row = $result->fetch_assoc()) {
-        $objects[] = $row;
-      }
-    }
-    $conn->close();
-    return $objects;
-  }
-/*
-  $sql2 = "SELECT license FROM autogo.cars";
-  $result = mysqli_query($conn, $sql2);
+  $sql1 = "SELECT * FROM autogo.cars";
+  $result = mysqli_query($conn, $sql1);
   while($row = mysqli_fetch_assoc($result)) {
-    $license = $row['license'];
-    echo $license;
-    
-    if(isset($_POST[$license])) {
-      echo $_POST[$license];
-      header('Location: transaction3.php');
+    if($row['available']=='yes') {
+      echo '<img src="'.($row['img']).'" class="cars"';
+      echo '<p> Model: '.($row['model']).'</p>';
+      echo '<p> Transmission: '.($row['transmission']).'</p>';
+      echo '<p> Seats: '.($row['seats']).'</p>';
+      echo '<p> MPG: '.($row['mpg']).'</p>';
+      echo '<p> Price: $'.($row['price']).'/day</p>';
+      echo "<button onclick='window.location.href=\"transactions2.php?price=".$row["price"]."&model=".$row["model"]."\"'>Rent this car</button>";
     }
   }
-*/
 ?>
 
 <!DOCTYPE html>
@@ -81,16 +33,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="transactions2.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/vendor/daterangepicker/daterangepicker.css">
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <!-- Calendar API -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!-- Map API -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <!-- Dropdown API -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <title>AutoGo</title>
 </head>
 <body>
@@ -105,6 +63,7 @@
             <a href="./contact.html">Contact</a>
         </div>
         <?php
+        session_start();
         if (!isset($_SESSION['username'])){
         echo "<div class='user_info'>
             <a href='./login.php'>Login</a>
@@ -116,9 +75,12 @@
         }
         ?>
     </div>
-    <button name="sortByPrice">Sort By Price</button>
+    <?php
 
-    <!--  Car Selection 
+
+    ?>
+
+    <!--  Car Selection
     <div class="container">
       <div class="team-grid">
         <div id="car1" class="team-card"><img src="images/compositor.jpeg" loading="lazy" srcset="images/compositor-p-500.jpeg 500w, images/compositor-p-800.jpeg 800w, images/compositor-p-1080.jpeg 1080w, images/compositor.jpeg 1440w" sizes="(max-width: 991px) 190px, 268px" alt="" class="team-member-image">
@@ -154,12 +116,12 @@
         </div>
       </div>
     </div>
-      
 
-     insurance picture 
+
+     insurance picture
     <img src = "insurance.png">
 
-     Forms for creating reservation  
+     Forms for creating reservation
 
     <form action="/AutoGo/transactions3.php" method="post">
       Select your car:
@@ -251,13 +213,11 @@
                     maxlength="50"
                     required/>
         </div><br>
-      
+
         <div class = "boxcenter">
           <input type="submit" value="Submit">
         </div>
     </form>
 -->
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

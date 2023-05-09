@@ -1,66 +1,159 @@
+<?php
+session_start();
+// If we select the locations and dates, go ahead and store into session variables.
+// move to next page, transactions2.php
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $_SESSION['pickup'] = $_POST["pickup"];
+    $_SESSION['returncar'] = $_POST["dropoff"];
+    $_SESSION['date'] = $_POST["date"];
+    $_SESSION['dateend'] = $_POST["dateend"];
+    echo "<BR>pick location:".$_SESSION['pickup'];
+    echo "<BR>drop off location:".$_SESSION['returncar'];
+    echo "<BR>Pick up date:".$_POST['date'];
+    echo "<BR>Drop off date:".$_POST['dateend'];
+    header('Location: /transactions2.php');
+  }
+?>
+
+
 <!DOCTYPE html>
-<html data-wf-page="641939e3ca3dd12de1a37598" data-wf-site="641939e3ca3dd150d6a37597">
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Car</title>
-  <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta content="Webflow" name="generator">
-  <link href="css/normalize.css" rel="stylesheet" type="text/css">
-  <link href="css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="css/car-e3b3bf.webflow.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-  <script type="text/javascript">WebFont.load({  google: {    families: ["Droid Serif:400,400italic,700,700italic"]  }});</script>
-  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
-  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-  <link href="images/webclip.png" rel="apple-touch-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="homepage.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/daterangepicker/daterangepicker.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- Calendar API -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!-- Map API -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <!-- Dropdown API -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <title>AutoGo</title>
 </head>
 <body>
-  <section class="team-circles wf-section">
-    <div class="div-block"><img src="images/autogo_logo.png" loading="lazy" sizes="200px" srcset="images/autogo_logo-p-500.png 500w, images/autogo_logo.png 728w" alt=""></div>
-    <div class="div-block-2">
-      <div class="text-block"><strong>Filter</strong>:</div>
-      <a href="#" class="button-4 w-button">Price</a>
-      <a href="#" class="button-3 w-button">Size</a>
+    <div class="bg_img"></div>
+    <div class="navbar">
+        <div class="logo">
+          <img src="images/autogo_logo.png" class="center" loading="lazy" sizes="200px" srcset="images/autogo_logo-p-500.png 500w, images/autogo_logo.png 728w" alt="">
+            <!--<img src="./img/autogo_logo.png" alt="logo"/>-->
+        </div>
+        <div class="nav">
+            <a href="./contact.html">Contact</a>
+            <a href="./contact.html">Contact</a>
+            <a href="./contact.html">Contact</a>
+        </div>
+        <?php
+        //session_start();
+        if (!isset($_SESSION['username'])){
+        echo "<div class='user_info'>
+            <a href='./login.php'>Login</a>
+            <a href='./create.php'>Sign Up</a>
+        </div>";
+        }
+        else {
+          echo "Your are logged in already!";
+        }
+        ?>
     </div>
-    <div class="container">
-      <div class="team-grid">
-        <div id="car1" class="team-card"><img src="images/compositor.jpeg" loading="lazy" srcset="images/compositor-p-500.jpeg 500w, images/compositor-p-800.jpeg 800w, images/compositor-p-1080.jpeg 1080w, images/compositor.jpeg 1440w" sizes="(max-width: 991px) 190px, 268px" alt="" class="team-member-image">
-          <div class="carSelection"><strong>Tesla Model 3</strong></div>
-          <div class="team-member-position">Tesla Model 3 <br>Standard Range<br></div><img src="images/Screen-Shot-2023-03-21-at-5.01.21-PM.png" loading="lazy" width="159" alt="" class="image">
-          <a href="insurance.html" class="button-2 w-button">$ 78 / Day</a>
+    <div class="infoContainer">
+        <form action="index.php" method="post">
+            <fieldset>
+                <legend>
+                    Pick-Up & Drop-Off Information
+                </legend>
+                <label for="pickup">Pick-up Location:</label>
+                <select id="pickup" style="width:350px" name="pickup">
+                    <option value="" disabled selected hidden>Choose a pick up location</option>
+                    <option value="San Francisco International Airport">San Francisco International Airport</option>
+                    <option value="San Jose International Airport">San Jose International Airport</option>
+                    <option value="Los Angeles International Airport">Los Angeles International Airport</option>
+                    <option value="AutoGo Car Rental - Sunnyvale">AutoGo Car Rental - Sunnyvale</option>
+                    <option value="AutoGo Car Rental - Sacramento">AutoGo Car Rental - Sacramento</option>
+                    <option value="AutoGo Car Rental - San Diego">AutoGo Car Rental - San Diego</option>
+                    <option value="AutoGo Car Rental - Santa Rosa">AutoGo Car Rental - Santa Rosa</option>
+                </select>
+                <label for="dropoff"><br>Drop-off Location:</label>
+                <select id="dropoff" style="width:350px" name="dropoff">
+                    <option value="" disabled selected hidden>Choose a pick up location</option>
+                    <option value="San Francisco International Airport">San Francisco International Airport</option>
+                    <option value="San Jose International Airport">San Jose International Airport</option>
+                    <option value="Los Angeles International Airport">Los Angeles International Airport</option>
+                    <option value="AutoGo Car Rental - Sunnyvale">AutoGo Car Rental - Sunnyvale</option>
+                    <option value="AutoGo Car Rental - Sacramento">AutoGo Car Rental - Sacramento</option>
+                    <option value="AutoGo Car Rental - San Diego">AutoGo Car Rental - San Diego</option>
+                    <option value="AutoGo Car Rental - Santa Rosa">AutoGo Car Rental - Santa Rosa</option>
+                </select>
+                <label for "date"><BR>Pick up date: <input type="date" select id="date" name="date">
+                <label for "dateend"><BR>Drop off date: <input type="date" select id="dateend" name="dateend">
+                <!--<label><br>Rental Dates: <input type="text" name="rentRange"/></label>-->
+            </fieldset>
+            <input type="submit" value="Choose your car!">
+        </form>
 
+        <div class="choosecar">
+            <a href="./transactions2.php">Choose your car!</a>
         </div>
-        <div id="car2" class="team-card"><img src="images/3140.jpeg" loading="lazy" sizes="(max-width: 991px) 190px, 268px" srcset="images/3140-p-500.jpeg 500w, images/3140.jpeg 636w" alt="" class="team-member-image">
-          <div class="carSelection"><strong>Large Sedan</strong></div>
-          <div class="team-member-position">2018 Chevrolet Impala</div><img src="images/Screen-Shot-2023-03-21-at-5.01.21-PM.png" loading="lazy" width="159" alt="" class="image">
-          <a href="insurance.html" class="button-2 w-button">$ 78 / Day</a>
-        </div>
-        <div id="car3" class="team-card"><img src="images/2018-Mazda-Mazda34-Door-GrandTouring.webp" loading="lazy" sizes="(max-width: 991px) 190px, 268px" srcset="images/2018-Mazda-Mazda34-Door-GrandTouring-p-500.webp 500w, images/2018-Mazda-Mazda34-Door-GrandTouring.webp 640w" alt="" class="team-member-image">
-          <div class="carSelection"><strong>Medium Sedan</strong></div>
-          <div class="team-member-position">2015 Mazda Sedan <br></div><img src="images/Screen-Shot-2023-03-21-at-5.01.21-PM.png" loading="lazy" width="159" alt="" class="image">
-          <a href="insurance.html" class="button-2 w-button">$ 78 / Day</a>
-        </div>
-        <div id="car4" class="team-card"><img src="images/2017_chrysler_pacifica_angularfront.jpeg" loading="lazy" sizes="(max-width: 991px) 190px, 268px" srcset="images/2017_chrysler_pacifica_angularfront-p-500.jpeg 500w, images/2017_chrysler_pacifica_angularfront.jpeg 640w" alt="" class="team-member-image">
-          <div class="carSelection"><strong>Minivan</strong></div>
-          <div class="team-member-position">2017 Chrysler 200C</div><img src="images/Screen-Shot-2023-03-21-at-5.01.21-PM.png" loading="lazy" width="159" alt="" class="image">
-          <a href="insurance.html" class="button-2 w-button">$ 78 / Day</a>
-        </div>
-        <div id="car5" class="team-card"><img src="images/Shelby-22GTH-herobanner.jpeg" loading="lazy" sizes="(max-width: 991px) 190px, 268px" srcset="images/Shelby-22GTH-herobanner-p-500.jpeg 500w, images/Shelby-22GTH-herobanner-p-800.jpeg 800w, images/Shelby-22GTH-herobanner-p-1080.jpeg 1080w, images/Shelby-22GTH-herobanner.jpeg 1440w" alt="" class="team-member-image">
-          <div class="carSelection"><strong>Standard Eite Sport</strong></div>
-          <div class="team-member-position">2018 Mustang GT <br>Convertible</div><img src="images/Screen-Shot-2023-03-21-at-5.01.21-PM.png" loading="lazy" width="159" alt="" class="image">
-          <a href="insurance.html" class="button-2 w-button">$ 78 / Day</a>
-        </div>
-        <div id="car6" class="team-card"><img src="images/slide-16-manufacturer-1530132884.jpeg" loading="lazy" sizes="(max-width: 991px) 190px, 268px" srcset="images/slide-16-manufacturer-1530132884-p-500.jpeg 500w, images/slide-16-manufacturer-1530132884-p-800.jpeg 800w, images/slide-16-manufacturer-1530132884-p-1080.jpeg 1080w, images/slide-16-manufacturer-1530132884-p-1600.jpeg 1600w, images/slide-16-manufacturer-1530132884-p-2000.jpeg 2000w, images/slide-16-manufacturer-1530132884.jpeg 2250w" alt="" class="team-member-image">
-          <div class="carSelection"><strong>Small Pickup Truck</strong></div>
-          <div class="team-member-position">2006 Ford F1-50</div><img src="images/Screen-Shot-2023-03-21-at-5.01.21-PM.png" loading="lazy" width="159" alt="" class="image">
-          <a href="insurance.html" class="button-2 w-button">$ 78 / Day</a>
-        </div>
-      </div>
     </div>
-  </section>
-  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=641939e3ca3dd150d6a37597" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="js/webflow.js" type="text/javascript"></script>
+    <script>
+        $(function(){
+            $('input[name="rentRange"]').daterangepicker({
+                opens: 'left',
+                "minDate": moment()
+            }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+
+            });
+        });
+    </script>
+
+    <div id="map" style="
+        height: 50%;
+        width: 30%;
+        display: flex;
+        top: 30%;
+        left: 9%;
+        align-items: center;
+        justify-content: space-between;
+        position: absolute;
+    "></div>
+    <script>
+        var map = L.map('map').setView([37.875255, -120.101326], 5);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        var sfo = L.marker([37.62849461978403, -122.40038974457457], {title: 'SFO Int. Airport'}).addTo(map);
+        var sj = L.marker([37.36537254130734, -121.92265044091677], {title: 'SJ Int. Airport'}).addTo(map);
+        var la = L.marker([33.95562282727402, -118.38545670331429], {title: 'LA Int. Airport'}).addTo(map);
+        var sunnyvale = L.marker([37.36332712789239, -122.027683631124], {title: 'Sunnyvale Location'}).addTo(map);
+        var sac = L.marker([38.59081825227345, -121.48249357895044], {title: 'Sacramento Location'}).addTo(map);
+        var sanDiego = L.marker([32.737733769001046, -117.17511466157211], {title: 'San Diego Location'}).addTo(map);
+        var santaRosa = L.marker([38.42727221566011, -122.71367374644063], {title: 'Santa Rosa Location'}).addTo(map);
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#pickLoc').select2();
+            $_SESSION['pickup'] = $('#pickLoc').select2();
+
+            $('#dropLoc').select2();
+            $_SESSION['returncar'] = $('#dropLoc').select2();
+
+
+        });
+    </script>
+
+
 </body>
 </html>

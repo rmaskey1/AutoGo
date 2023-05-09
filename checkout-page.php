@@ -5,23 +5,43 @@
     echo "option1 = ".$_GET['option1'];
   }
 
+  //echo "Price: ".$_SESSION['price'];
   // check date
 
   $date1 = strtotime($_SESSION['date']);
   $date2 = strtotime($_SESSION['dateend']);
   $datediff = $date2-$date1;
   $datediff = round($datediff / (60 * 60 * 24));
-  echo "days: ".$datediff;
+  $datediff = $datediff + 1; // because may 15 - may 15 should be 1 day
+  //echo "days: ".$datediff;
+
+  if (isset($_SESSION['price'])){
+    $total = ($datediff)*($_SESSION['price']);
+  }
+  else{
+    $total = ($datediff)*(78);
+  }
+  if ($_SESSION['option1']=='gold'){
+    $total =$total + 50*$datediff;
+  }
+  else if ($_SESSION['option1']=='silver'){
+    $total =$total + 40*$datediff;
+  }
+  else if ($_SESSION['option1']=='bronze'){
+    $total =$total + 30*$datediff;
+  }
+  //echo "Total: ".$total;
+  $_SESSION['total'] = $total;
 
 
 
 
 
   if(isset($_SESSION['username'])){
-    echo "You are signed in.<BR>";
+    //echo "You are signed in.<BR>";
   }
   else {
-    echo "You need to sign in!<BR>";
+    echo "You need to sign in!!<BR>";
   }
 ?>
 
@@ -54,7 +74,7 @@
         <div class="text-6">Reservations must be cancelled prior to pick-up time or will be subject to a No-Show Fee. A valid credit card must be presented at the time of rental to complete the reservation.</div>
       </div>
       <div class="form-wrapper-2 w-form">
-        <form action="complete.php" method="post">
+        <form action="complete.php" id="CheckoutForms" name = "CheckoutForms" method="post" class = "form">
         <!--<form id="CheckoutForms" name="CheckoutForms" data-name="Form" method="get" class="form">-->
           <div class="input-wrapper"><label for="name" class="form-block-label">Card Name</label>
             <input type="text" class="form-text-input w-input" maxlength="256" name="name" data-name="Name" placeholder="Full Name" id="name"></div>
@@ -66,7 +86,7 @@
             <input type="text" class="form-text-input-2 w-input" maxlength="256" name="name" data-name="Name" placeholder="Address" id="name"></div>
           <div class="input-wrapper-2"><label for="name" class="form-block-label">City</label>
             <input type="text" class="form-text-input-4 w-input" maxlength="256" name="name" data-name="Name" placeholder="" id="name"></div><label for="name" class="form-block-label">State</label><input type="text" class="form-text-input-5 w-input" maxlength="256" name="name" data-name="Name" placeholder="" id="name">
-            <input type="submit" value="Choose your car!">
+            <input type="submit" value="Create your reservation!">
         </form>
         <div class="w-form-done">
           <div>Thank you! Your submission has been received!</div>
@@ -87,6 +107,10 @@
           <BR>Order Subtotal
           <BR>Your name : <?php echo $_SESSION['username'];?>
           <BR>Confirmation number: <?php echo $_SESSION['confirm'];?>
+          <BR>Car model: <?php echo $_SESSION['license'];?>
+            <?php if(isset($_SESSION['price'])){
+              echo ", $".$_SESSION['price']."/day";}?>
+
           <BR>Pick up location: <?php echo $_SESSION['pickup'];?>
           <BR>Drop off location: <?php echo $_SESSION['returncar'];?>
           <BR>Pick up time: <?php echo $_SESSION['date'];?>
@@ -116,8 +140,8 @@
     <div class="content">
       <div class="text-7">EST. TOTAL</div>
       <div class="text-8">$<?php echo $_SESSION['total'];?></div>
-      <a href="complete.php" class="button-8">
-        <div class="text-9">SUBMIT</div>
+      <!--<a href="complete.php" class="button-8">
+        <div class="text-9">SUBMIT</div>-->
       </a>
     </div>
   </div>
