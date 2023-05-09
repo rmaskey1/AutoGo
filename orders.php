@@ -23,7 +23,7 @@
 
 
   if (isset($_POST['returncar'])){
-    $returncar = $_POST['returncar'];
+      $returncar = $_POST['returncar'];
       $conn = mysqli_connect("localhost", "root", "", "autogo");
       //$sql = "SELECT balance FROM accounts where account = $selected";
       $sql = "SELECT * FROM `reservations` WHERE `username`='$username'  ";
@@ -31,9 +31,10 @@
       $row = mysqli_fetch_assoc($results);
 
       //$selected = $_POST['accountdelete'];
-      echo "Order $selected has been deleted!<BR><BR>";
+      echo "Order $returncar has been returned!<BR><BR>";
       $conn = mysqli_connect("localhost", "root", "", "autogo");
-      $sql = "DELETE FROM `reservations` WHERE `confirm` = '$selected'";
+      $returned = "returned";
+      $sql = "UPDATE `reservations` SET `option2` = '$returned' WHERE `confirm` = '$returncar'";
       // convirmation order is confirm. we want to  deleted the $selected
       $result = $conn->query($sql);
 
@@ -189,7 +190,7 @@
 <form id="returncar" name="returncar" method="post" action="./orders.php">
   <div id="returncar">
       <h3>Return Car:</h3>
-        Select a car to reeturn
+        Select a car to return
         <BR>
         <select name="returncar">
         <?php
