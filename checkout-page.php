@@ -77,7 +77,7 @@
         <div class="text-6">Reservations must be cancelled prior to pick-up time or will be subject to a No-Show Fee. A valid credit card must be presented at the time of rental to complete the reservation.</div>
       </div>
       <div class="form-wrapper-2 w-form">
-        <form action="complete.php" id="CheckoutForms" name = "CheckoutForms" method="post" class = "form">
+        <form action="./complete.php" id="CheckoutForms" name = "CheckoutForms" method="post" class = "form">
         <!--<form id="CheckoutForms" name="CheckoutForms" data-name="Form" method="get" class="form">-->
           <div class="input-wrapper"><label for="name" class="form-block-label">Card Name</label>
             <input type="text" class="form-text-input w-input" maxlength="256" name="name" data-name="Name" placeholder="Full Name" id="name"></div>
