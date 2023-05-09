@@ -1,3 +1,33 @@
+<?php
+  session_start();
+  error_reporting(E_ALL ^ E_WARNING);
+  $username = "$_SESSION[username]";
+ ?>
+
+<?php
+    //Checking to see that all fields are filled before proceeding to next page
+    if(isset($_POST['sub'])) {
+        if( isset($_POST['pickup']) || isset($_POST['dropoff']) || isset($_POST['rentRange']) ) {
+            $pickup = $_POST['pickup'];
+            $dropoff = $_POST['dropoff'];
+            $rentRange = $_POST['rentRange'];
+            if($pickup && $dropoff && $rentRange) {
+                $_SESSION['pickupLocation'] = $pickup;
+                $_SESSION['dropoffLocation'] = $dropoff;
+                $_SESSION['pickupDate'] = explode(" - ", $rentRange)[0];
+                $_SESSION['dropoffDate'] = explode(" - ", $rentRange)[1];
+                header('Location: transactions2.php');
+            }
+            else {
+                header('Location: homepage.php');
+            }
+        }
+        else {
+            header('Location: homepage.php');
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html data-wf-page="6451a8c92eebfa5839a89f9b" data-wf-site="644ae8923d92094098ec3617">
 <head>
@@ -24,9 +54,9 @@
     <meta content="Homepage" property="twitter:title">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="Webflow" name="generator">
-    <link href="normalize.css" rel="stylesheet" type="text/css">
-    <link href="webflow.css" rel="stylesheet" type="text/css">
-    <link href="autogo.webflow.css" rel="stylesheet" type="text/css">
+    <link href="css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="css/webflow.css" rel="stylesheet" type="text/css">
+    <link href="css/autogo.webflow.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -42,11 +72,11 @@
         <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-logo-left-container-2 shadow-three w-nav">
         <div class="container-3">
             <div class="navbar-wrapper-3">
-            <a href="index.php" class="navbar-brand-3 w-nav-brand"><img src="autogo_logo.png" loading="lazy" alt="" class="image-5" style="width: 500px;"></a>
+            <a href="homepage.php" class="navbar-brand-3 w-nav-brand"><img src="autogo_logo.png" loading="lazy" alt="" class="image-5" style="width: 500px;"></a>
             <nav role="navigation" class="nav-menu-wrapper-3 w-nav-menu">
                 <ul role="list" class="nav-menu-two-2 w-list-unstyled">
                 <li>
-                    <a href="index.php" class="nav-link-3">Home</a>
+                    <a href="homepage.php" class="nav-link-3">Home</a>
                 </li>
                 <li>
                     <a href="about.php" class="nav-link-3">About</a>
@@ -75,31 +105,12 @@
         </div>
         </div>
     </div>
-    <div class="bg_img"></div>
+    <div class="banner">
+        <img src="banner_img.png"/>
+    </div>
+    <!-- <div class="bg_img"></div> -->
     
-    <?php
-    //Checking to see that all fields are filled before proceeding to next page
-    if(isset($_POST['sub'])) {
-        if( isset($_POST['pickup']) || isset($_POST['dropoff']) || isset($_POST['rentRange']) ) {
-            $pickup = $_POST['pickup'];
-            $dropoff = $_POST['dropoff'];
-            $rentRange = $_POST['rentRange'];
-            if($pickup && $dropoff && $rentRange) {
-                $_SESSION['pickupLocation'] = $pickup;
-                $_SESSION['dropoffLocation'] = $dropoff;
-                $_SESSION['pickupDate'] = explode(" - ", $rentRange)[0];
-                $_SESSION['dropoffDate'] = explode(" - ", $rentRange)[1];
-                header('Location: transactions2.php');
-            }
-            else {
-                header('Location: homepage.php');
-            }
-        }
-        else {
-            header('Location: homepage.php');
-        }
-    }
-?>
+    
     <!--
     <div class="navbar">
         <div class="logo">
@@ -113,40 +124,40 @@
         
     </div>
     -->
-
-        <body>
-    <div class="infoContainer">
+    <div class="info-container">
         <form name="myForm" action="homepage.php" method="post" onsubmit="return validateForm()">
-            <fieldset>
-                <legend>
-                    Pick-Up & Drop-Off Information
-                </legend>
-                <label for="pickLoc">Pick-up Location:</label>
-                <select id="pickLoc" style="width:350px" name="pickup">
-                    <option value="" disabled selected hidden></option>
-                    <option value="San Francisco International Airport">San Francisco International Airport</option>
-                    <option value="San Francisco International Airport">San Jose International Airport</option>
-                    <option value="San Francisco International Airport">Los Angeles International Airport</option>
-                    <option value="San Francisco International Airport">AutoGo Car Rental - Sunnyvale</option>
-                    <option value="San Francisco International Airport">AutoGo Car Rental - Sacramento</option>
-                    <option value="San Francisco International Airport">AutoGo Car Rental - San Diego</option>
-                    <option value="San Francisco International Airport">AutoGo Car Rental - Santa Rosa</option>
-                </select>
-                <label for="dropLoc"><br>Drop-off Location:</label>
-                <select id="dropLoc" style="width:350px" name="dropoff">
-                    <option value="" disabled selected hidden></option>
-                    <option value="San Francisco International Airport">San Francisco International Airport</option>
-                    <option value="San Francisco International Airport">San Jose International Airport</option>
-                    <option value="San Francisco International Airport">Los Angeles International Airport</option>
-                    <option value="San Francisco International Airport">AutoGo Car Rental - Sunnyvale</option>
-                    <option value="San Francisco International Airport">AutoGo Car Rental - Sacramento</option>
-                    <option value="San Francisco International Airport">AutoGo Car Rental - San Diego</option>
-                    <option value="San Francisco International Airport">AutoGo Car Rental - Santa Rosa</option>
-                </select>
-                <label><br>Rental Dates: <input type="text" name="rentRange"/></label>
-            </fieldset>
+            <div class="form-group">
+            <label for="pickLoc">Pick-up Location</label>
+            <select class="form-control" id="pickLoc" name="pickup">
+                <option value="" disabled selected hidden>Select a location</option>
+                <option value="San Francisco International Airport">San Francisco International Airport</option>
+                <option value="San Jose International Airport">San Jose International Airport</option>
+                <option value="Los Angeles International Airport">Los Angeles International Airport</option>
+                <option value="AutoGo Car Rental - Sunnyvale">AutoGo Car Rental - Sunnyvale</option>
+                <option value="AutoGo Car Rental - Sacramento">AutoGo Car Rental - Sacramento</option>
+                <option value="AutoGo Car Rental - San Diego">AutoGo Car Rental - San Diego</option>
+                <option value="AutoGo Car Rental - Santa Rosa">AutoGo Car Rental - Santa Rosa</option>
+            </select>
+            </div>
+            <div class="form-group">
+            <label for="dropLoc">Drop-off Location</label>
+            <select class="form-control" id="dropLoc" name="dropoff">
+                <option value="" disabled selected hidden>Select a location</option>
+                <option value="San Francisco International Airport">San Francisco International Airport</option>
+                <option value="San Jose International Airport">San Jose International Airport</option>
+                <option value="Los Angeles International Airport">Los Angeles International Airport</option>
+                <option value="AutoGo Car Rental - Sunnyvale">AutoGo Car Rental - Sunnyvale</option>
+                <option value="AutoGo Car Rental - Sacramento">AutoGo Car Rental - Sacramento</option>
+                <option value="AutoGo Car Rental - San Diego">AutoGo Car Rental - San Diego</option>
+                <option value="AutoGo Car Rental - Santa Rosa">AutoGo Car Rental - Santa Rosa</option>
+            </select>
+            </div>
+            <div class="form-group">
+            <label for="rentRange">Rental Dates</label>
+            <input class="form-control" type="text" id="rentRange" name="rentRange" placeholder="Select rental dates" />
+            </div>
             <div class="choosecar">
-                <button type="submit" name='sub' id="sub">Choose your car!</button>
+                <button type="submit" class="btn" name="sub">Choose your car!</button>
             </div>
         </form>
     </div>
@@ -161,16 +172,7 @@
         });
     </script>
 
-    <div id="map" style="
-        height: 50%;
-        width: 30%;
-        display: flex;
-        top: 30%;
-        left: 9%;
-        align-items: center;
-        justify-content: space-between;
-        position: absolute;
-    "></div>
+    <div id="map" class="map"></div>
     <script>
         var map = L.map('map').setView([37.875255, -120.101326], 5);
 

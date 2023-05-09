@@ -20,7 +20,7 @@
       $address = $_POST["address"];
 
       // Create connection
-      $conn = mysqli_connect("localhost", "root", "", "autogo");
+      $conn = mysqli_connect("localhost", "root", "admin", "autogo");
 
       if (!$conn) {
           die("Connection failed: " . mysqli_connect_error());

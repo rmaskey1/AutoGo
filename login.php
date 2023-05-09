@@ -16,7 +16,7 @@
       $_SESSION['username'] = $username;
 
       //create connection
-      $conn = mysqli_connect("localhost", "root", "", "autogo");
+      $conn = mysqli_connect("localhost", "root", "admin", "autogo");
 
       //Check connection
       if (!$conn) {
@@ -39,7 +39,7 @@
         } else {
             $_SESSION["username"] = "incorrect password";
             echo "password incorrect";
-          header("Location: accountLogin.php");
+          header("Location: login.php");
           echo "password incorrect";
         }
       } else {
@@ -48,7 +48,7 @@
       mysqli_close($conn); //close connection
     }else {
       $_SESSION["username"] = "One of the information is empty";
-      header("Location: accountLogin.php");
+      header("Location: login.php");
       echo "Nothing was submitted";
     }
   }
@@ -92,7 +92,7 @@
           <nav role="navigation" class="nav-menu-wrapper-3 w-nav-menu">
             <ul role="list" class="nav-menu-two-2 w-list-unstyled">
               <li>
-                <a href="index.php" class="nav-link-3">Home</a>
+                <a href="homepage.php" class="nav-link-3">Home</a>
               </li>
               <li>
                 <a href="about.php" class="nav-link-3">About</a>
