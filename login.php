@@ -16,7 +16,7 @@
       $_SESSION['username'] = $username;
 
       //create connection
-      $conn = mysqli_connect("localhost", "root", "admin", "autogo");
+      $conn = mysqli_connect("localhost", "root", "", "autogo");
 
       //Check connection
       if (!$conn) {
@@ -35,11 +35,11 @@
           $results = mysqli_query($conn, $sql);
           // Store username variable, go to main
           $_SESSION['username']=$username;
-          header("Location: accountInfo.php");
+          header("Location: ./accountInfo.php");
         } else {
             $_SESSION["username"] = "incorrect password";
             echo "password incorrect";
-          header("Location: login.php");
+          header("Location: ./login.php");
           echo "password incorrect";
         }
       } else {
@@ -48,7 +48,7 @@
       mysqli_close($conn); //close connection
     }else {
       $_SESSION["username"] = "One of the information is empty";
-      header("Location: login.php");
+      header("Location: ./login.php");
       echo "Nothing was submitted";
     }
   }
@@ -89,14 +89,14 @@
     <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-logo-left-container-2 shadow-three w-nav">
     <div class="container-3">
       <div class="navbar-wrapper-3">
-      <a href="homepage.php" class="navbar-brand-3 w-nav-brand"><img src="autogo_logo.png" loading="lazy" alt="" class="image-5" style="width: 500px;"></a>
+      <a href="./homepage.php" class="navbar-brand-3 w-nav-brand"><img src="autogo_logo.png" loading="lazy" alt="" class="image-5" style="width: 500px;"></a>
       <nav role="navigation" class="nav-menu-wrapper-3 w-nav-menu">
           <ul role="list" class="nav-menu-two-2 w-list-unstyled">
           <li>
-              <a href="homepage.php" class="nav-link-3">Home</a>
+              <a href="./homepage.php" class="nav-link-3">Home</a>
           </li>
           <li>
-              <a href="about.php" class="nav-link-3">About</a>
+              <a href="./about.php" class="nav-link-3">About</a>
           </li>
           <?php
               if (!isset($_SESSION['username'])){
@@ -110,7 +110,7 @@
               echo
                   '
                   <li>
-                      <a href="accountInfo.php" class="nav-link-3"><img src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png" style="width: 40px; height: 40px"/></a>
+                      <a href="./accountInfo.php" class="nav-link-3"><img src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png" style="width: 40px; height: 40px"/></a>
                   </li>
                   <li class="mobile-margin-top-12">
                       <a href="./login.php" class="button-2 w-button">Logout</a>
@@ -135,11 +135,11 @@
           <div class="text-2">Welcome Back!</div>
         </div>
         <div class="form-wrapper w-form">
-          <form id="webflow-form" name="webflow-form" data-name="Webflow Form" method="post" class="form-3" action="login.php">
+          <form id="webflow-form" name="webflow-form" data-name="Webflow Form" method="post" class="form-3" action="./login.php">
             <div class="input-wrapper"><label for="username" class="form-block-label">User Name</label><input type="text" class="form-text-input w-input" maxlength="256" name="username" data-name="Name" placeholder="Your user name" id="username"></div>
             <div class="input-wrapper"><label for="password" class="form-block-label">Password</label><input type="password" class="form-text-input-2 w-input" maxlength="256" name="password" data-name="Name" placeholder="Password" id="password"></div>
             <div class="input-wrapper"></div><input type="submit" value="Submit" data-wait="Logging in..." class="form-button w-button">
-            <a href="create.php" class="button-4 w-button">Don&#x27;t have an account? Click here to create an account!</a>
+            <a href="./create.php" class="button-4 w-button">Don&#x27;t have an account? Click here to create an account!</a>
           </form>
           <div class="w-form-done">
             <div>Thank you! Your submission has been received!</div>

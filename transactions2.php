@@ -1,9 +1,18 @@
-<?php
+<?php/*
   // this php code checks if user is logged in
   session_start();
   error_reporting(E_ALL ^ E_WARNING);
-  $username = "$_SESSION[username]";
+  $username = "$_SESSION[username]";*/
  ?>
+
+ <?php
+   session_start();
+   if (isset($_GET['price'])&&isset($_GET['model'])) {
+     $_SESSION['price'] = $_GET['price'];
+     $_SESSION['license'] = $_GET['model'];
+     header('Location: /insurance.php');
+   }
+?>
 
 <!DOCTYPE html>
 <html>
@@ -96,7 +105,8 @@
           echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> Transmission: '.($object['transmission']).'</p>';
           echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> Seats: '.($object['seats']).'</p>';
           echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> MPG: '.($object['mpg']).'</p>';
-          echo              "<button type='button' style='margin-top: 5px; margin-left: 200px' class='btn btn-danger btn-md' onclick='window.location.href=\"insurance.php?price=".$object["price"]."&".$object["license"]."\"'>Rent this car</button>";
+          echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> Price: $'.($object['price'])."/day".'</p>';
+          echo              "<button type='button' style='margin-top: 5px; margin-left: 200px' class='btn btn-danger btn-md' onclick='window.location.href=\"./transactions2.php?price=".$object["price"]."&model=".$object["license"]."\"'>Rent this car</button>";
           echo          '</div>';
           echo     '</div>';
           }
@@ -106,7 +116,7 @@
 
       function get_objects_from_db() {
           // Replace with your own database connection code
-          $conn = mysqli_connect("localhost", "root", "admin", "autogo");
+          $conn = mysqli_connect("localhost", "root", "", "autogo");
           if (!$conn) {
           die("Connection failed: " . mysqli_connect_error());
           }

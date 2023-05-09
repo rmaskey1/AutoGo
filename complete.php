@@ -5,7 +5,13 @@
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // We have entered from the check-out page, let's create the reservation
     //echo "This is a post";
-    $username = $_SESSION['username'];
+    if(isset($_SESSION['username'])){
+      $username = $_SESSION['username'];
+    }
+    else {
+      $username = $_POST['email'];
+    }
+
     $confirm = $_SESSION['confirm'];
     $license = $_SESSION['license'];
     $option1 = $_SESSION['option1'];

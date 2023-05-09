@@ -5,8 +5,7 @@
     echo "option1 = ".$_GET['option1'];
   }
 
-  //echo "Price: ".$_SESSION['price'];
-  // check date
+  // calculating prices based on car selection and insurance option
 
   $date1 = strtotime($_SESSION['date']);
   $date2 = strtotime($_SESSION['dateend']);
@@ -44,7 +43,7 @@
     //echo "You are signed in.<BR>";
   }
   else {
-    echo "You need to sign in!!<BR>";
+    echo "You need to sign in to modify or cancel orders. <a href='./create.php'>Sign up!</a>";
   }
 ?>
 
@@ -78,7 +77,12 @@
       </div>
       <div class="form-wrapper-2 w-form">
         <form action="./complete.php" id="CheckoutForms" name = "CheckoutForms" method="post" class = "form">
-        <!--<form id="CheckoutForms" name="CheckoutForms" data-name="Form" method="get" class="form">-->
+          <?php
+          if (!isset($_SESSION['username'])){
+            echo "<div class='input-wrapper'><label for='email' class='form-block-label'>Email (for guest checkout)</label>";
+            echo "<input type='text' class='form-text-input w-input' maxlength='256' name='email' data-name='email' placeholder='email' id='email'></div>";
+          }
+            ?>
           <div class="input-wrapper"><label for="name" class="form-block-label">Card Name</label>
             <input type="text" class="form-text-input w-input" maxlength="256" name="name" data-name="Name" placeholder="Full Name" id="name"></div>
           <div class="input-wrapper"><label for="name" class="form-block-label">Card Number</label>
@@ -108,7 +112,14 @@
       <div class="form-wrapper w-form">
         <form id="CheckoutForms" name="CheckoutForms" data-name="Form" method="get" class="form">
           <BR>Order Subtotal
-          <BR>Your name : <?php echo $_SESSION['username'];?>
+          <BR>Your name : <?php
+          if(isset($_SESSION['username'])){
+            echo $_SESSION['username'];
+          }
+          else {
+            echo "Enter your email for a guest checkout!";
+          }
+          ?>
           <BR>Confirmation number: <?php echo $_SESSION['confirm'];?>
           <BR>Car model: <?php echo $_SESSION['license'];?>
             <?php if(isset($_SESSION['price'])){

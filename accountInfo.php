@@ -89,14 +89,14 @@
         <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-logo-left-container-2 shadow-three w-nav">
         <div class="container-3">
             <div class="navbar-wrapper-3">
-            <a href="homepage.php" class="navbar-brand-3 w-nav-brand"><img src="autogo_logo.png" loading="lazy" alt="" class="image-5" style="width: 500px;"></a>
+            <a href="./homepage.php" class="navbar-brand-3 w-nav-brand"><img src="./autogo_logo.png" loading="lazy" alt="" class="image-5" style="width: 500px;"></a>
             <nav role="navigation" class="nav-menu-wrapper-3 w-nav-menu">
                 <ul role="list" class="nav-menu-two-2 w-list-unstyled">
                 <li>
-                    <a href="homepage.php" class="nav-link-3">Home</a>
+                    <a href="./homepage.php" class="nav-link-3">Home</a>
                 </li>
                 <li>
-                    <a href="about.php" class="nav-link-3">About</a>
+                    <a href="./about.php" class="nav-link-3">About</a>
                 </li>
                 <?php
                     if (!isset($_SESSION['username'])){
@@ -110,7 +110,7 @@
                     echo
                         '
                         <li>
-                            <a href="accountInfo.php" class="nav-link-3"><img src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png" style="width: 40px; height: 40px"/></a>
+                            <a href="./accountInfo.php" class="nav-link-3"><img src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png" style="width: 40px; height: 40px"/></a>
                         </li>
                         <li class="mobile-margin-top-12">
                             <a href="./login.php" class="button-2 w-button">Logout</a>
@@ -135,10 +135,10 @@
      <div class="navbar-wrapper-3">
      <ul role="list" class="nav-menu-two-2 w-list-unstyled">
       <li>
-        <a href="ordersInfo.php" class="btn nav-btn">Order Information</a>
+        <a href="./orders.php" class="btn nav-btn">Order Information</a>
       </li>
       <li>
-        <a href="accountInfo.php" class="btn nav-btn">Account Information</a>
+        <a href="./accountInfo.php" class="btn nav-btn">Account Information</a>
       </li>
     </ul>
 
@@ -149,7 +149,7 @@
             // checks username, and puts the table row into variables
             // prints out
               {
-                $conn = mysqli_connect("localhost", "root", "admin", "autogo");
+                $conn = mysqli_connect("localhost", "root", "", "autogo");
                 $sql = "SELECT * FROM `users` WHERE `username`='$username'  ";
                 $result = $conn->query($sql);
                 //$_SESSION['username']=$username;
