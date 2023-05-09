@@ -10,7 +10,7 @@
    if (isset($_GET['price'])&&isset($_GET['model'])) {
      $_SESSION['price'] = $_GET['price'];
      $_SESSION['license'] = $_GET['model'];
-     header('Location: /insurance.php');
+     header('Location: ./insurance.php');
    }
 ?>
 
@@ -106,7 +106,7 @@
           echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> Seats: '.($object['seats']).'</p>';
           echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> MPG: '.($object['mpg']).'</p>';
           echo              '<p class="card-text" style="font-size: 18px; line-height: 1.6; margin-left: 200px"> Price: $'.($object['price'])."/day".'</p>';
-          echo              "<button type='button' style='margin-top: 5px; margin-left: 200px' class='btn btn-danger btn-md' onclick='window.location.href=\"./transactions2.php?price=".$object["price"]."&model=".$object["license"]."\"'>Rent this car</button>";
+          echo              "<button type='button' style='margin-top: 5px; margin-left: 200px' class='btn btn-danger btn-md' onclick='window.location.href=\"./transactions2.php?price=".$object["price"]."&model=".$object["model"]."\"'>Rent this car</button>";
           echo          '</div>';
           echo     '</div>';
           }
