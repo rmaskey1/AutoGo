@@ -12,11 +12,11 @@
             $dropoff = $_POST['dropoff'];
             $rentRange = $_POST['rentRange'];
             if($pickup && $dropoff && $rentRange) {
-                $_SESSION['pickupLocation'] = $pickup;
-                $_SESSION['dropoffLocation'] = $dropoff;
-                $_SESSION['pickupDate'] = explode(" - ", $rentRange)[0];
-                $_SESSION['dropoffDate'] = explode(" - ", $rentRange)[1];
-                header('Location: transactions2.php');
+                $_SESSION['pickup'] = $pickup;
+                $_SESSION['returncar'] = $dropoff;
+                $_SESSION['date'] = explode(" - ", $rentRange)[0];
+                $_SESSION['dateend'] = explode(" - ", $rentRange)[1];
+                header('Location: ./transactions2.php');
             }
             else {
                 header('Location: homepage.php');
@@ -49,7 +49,7 @@
     <!-- Dropdown API -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
+
     <meta content="Homepage" property="og:title">
     <meta content="Homepage" property="twitter:title">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -90,7 +90,7 @@
                         </li>';
                     }
                     else {
-                    echo 
+                    echo
                         '<li class="mobile-margin-top-12">
                             <a href="./login.php" class="button-2 w-button">Logout</a>
                         </li>';
@@ -109,8 +109,8 @@
         <img src="banner_img.png"/>
     </div>
     <!-- <div class="bg_img"></div> -->
-    
-    
+
+
     <!--
     <div class="navbar">
         <div class="logo">
@@ -121,7 +121,7 @@
             <a href="./contact.html">Contact</a>
             <a href="./contact.html">Contact</a>
         </div>
-        
+
     </div>
     -->
     <div class="info-container">
@@ -203,9 +203,9 @@
                 alert('One or more fields are incomplete!');
                 return false;
             }
-            else {              
+            else {
                 return true;
-            }           
+            }
         }
     </script>
 </body>
