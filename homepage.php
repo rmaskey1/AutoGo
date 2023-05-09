@@ -1,4 +1,83 @@
-<?php
+<!DOCTYPE html>
+<html data-wf-page="6451a8c92eebfa5839a89f9b" data-wf-site="644ae8923d92094098ec3617">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="homepage.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/daterangepicker/daterangepicker.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- Calendar API -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!-- Map API -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <!-- Dropdown API -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+    <meta content="Homepage" property="og:title">
+    <meta content="Homepage" property="twitter:title">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Webflow" name="generator">
+    <link href="normalize.css" rel="stylesheet" type="text/css">
+    <link href="webflow.css" rel="stylesheet" type="text/css">
+    <link href="autogo.webflow.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">WebFont.load({  google: {    families: ["Changa One:400,400italic","Droid Serif:400,400italic,700,700italic","Bitter:400,700,400italic"]  }});</script>
+    <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+    <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="images/webclip.png" rel="apple-touch-icon">
+    <title>AutoGo</title>
+</head>
+<body>
+    <div class="navbar-logo-left-2 wf-section">
+        <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-logo-left-container-2 shadow-three w-nav">
+        <div class="container-3">
+            <div class="navbar-wrapper-3">
+            <a href="index.php" class="navbar-brand-3 w-nav-brand"><img src="autogo_logo.png" loading="lazy" alt="" class="image-5" style="width: 500px;"></a>
+            <nav role="navigation" class="nav-menu-wrapper-3 w-nav-menu">
+                <ul role="list" class="nav-menu-two-2 w-list-unstyled">
+                <li>
+                    <a href="index.php" class="nav-link-3">Home</a>
+                </li>
+                <li>
+                    <a href="about.php" class="nav-link-3">About</a>
+                </li>
+                <?php
+                    if (!isset($_SESSION['username'])){
+                    echo
+                        '<li class="mobile-margin-top-12">
+                            <a href="./login.php" class="button-2 w-button">Login</a>
+                            <a href="./create.php" class="button-2 w-button">Sign Up</a>
+                        </li>';
+                    }
+                    else {
+                    echo 
+                        '<li class="mobile-margin-top-12">
+                            <a href="./login.php" class="button-2 w-button">Logout</a>
+                        </li>';
+                    }
+                ?>
+                </ul>
+            </nav>
+            <div class="menu-button-3 w-nav-button">
+                <div class="w-icon-nav-menu"></div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="bg_img"></div>
+    
+    <?php
     //Checking to see that all fields are filled before proceeding to next page
     if(isset($_POST['sub'])) {
         if( isset($_POST['pickup']) || isset($_POST['dropoff']) || isset($_POST['rentRange']) ) {
@@ -21,32 +100,7 @@
         }
     }
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="homepage.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/vendor/daterangepicker/daterangepicker.css">
-    <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <!-- Calendar API -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <!-- Map API -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    <!-- Dropdown API -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <title>AutoGo</title>
-</head>
-<body>
-    <div class="bg_img"></div>
+    <!--
     <div class="navbar">
         <div class="logo">
             <img src="autogo_logo.png" alt="logo"/>
@@ -56,22 +110,11 @@
             <a href="./contact.html">Contact</a>
             <a href="./contact.html">Contact</a>
         </div>
-        <?php
-        if (!isset($_SESSION['username'])){
-        echo 
-            "<div class='user_info'>
-            <a href='./login.php'>Login</a>
-            <a href='./create.php'>Sign Up</a>
-            </div>";
-        }
-        else {
-          echo 
-            "<div class='user_info'>
-            <a href='./accountInfo.php'>Profile</a>
-            </div>";
-        }
-        ?>
+        
     </div>
+    -->
+
+        <body>
     <div class="infoContainer">
         <form name="myForm" action="homepage.php" method="post" onsubmit="return validateForm()">
             <fieldset>

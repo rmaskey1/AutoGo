@@ -63,7 +63,7 @@ body, html {
 }
   
 .user_info a {
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 130%;
     margin-top: 30px;
     color: black;
@@ -74,6 +74,7 @@ body, html {
     text-decoration: none;
     transition-duration: 0.2s;
     float: right;
+    font-weight: normal;
 }
 
 .user_info a:hover {
@@ -93,7 +94,7 @@ label {
     left: 50%;
     width: 40%;
     flex-direction: column;
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     background-color: white;
     color:black;
@@ -102,7 +103,7 @@ label {
 }
 
 .pickup {
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: white;
     color:black;
     padding: 25px;
@@ -110,7 +111,7 @@ label {
 }
 
 .dropoff {
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: white;
     color:black;
     padding: 19.5px;
@@ -126,7 +127,7 @@ label {
 .choosecar button {
     border-style: none;
     padding: 15px;
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: white;
     color:black;
     text-decoration: none;
