@@ -41,6 +41,24 @@
       // convirmation order is confirm. we want to  deleted the $selected
       $result = $conn->query($sql);
 
+
+
+      // we want to set available to yes in car reservation
+      /*
+      $sql = "SELECT `license` FROM `reservations` WHERE `confirm` ='$returning'";
+      $result = $conn->query($sql);
+      while ($row = mysql_fetch_array($result))
+      {
+        $model = $row['license'];
+      }
+      $conn = mysqli_connect("localhost", "root", "", "autogo");
+      */
+      $sql = "UPDATE `cars` SET `available`='yes' WHERE 1";
+      // the session[license] is the model name, we changed some things
+      $result = $conn->query($sql);
+
+
+
     }
   }
  ?>

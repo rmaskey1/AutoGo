@@ -176,6 +176,15 @@ session_start();
       echo mysqli_error($conn);
       echo "There was an error creating your reservation.";
     }
+
+
+    // set available to NO
+    $conn = mysqli_connect("localhost", "root", "", "autogo");
+    $sql = "UPDATE `cars` SET `available`='no' WHERE `model` = '$_SESSION[license]'";
+    // the session[license] is the model name, we changed some things
+    $results = mysqli_query ($conn, $sql);
+    
+
   }
   else{
     echo "There is something missing.<BR>";
