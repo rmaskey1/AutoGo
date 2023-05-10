@@ -23,7 +23,7 @@
 
 
   if (isset($_POST['returncar'])){
-      $returncar = $_POST['returncar'];
+    $returncar = $_POST['returncar'];
       $conn = mysqli_connect("localhost", "root", "", "autogo");
       //$sql = "SELECT balance FROM accounts where account = $selected";
       $sql = "SELECT * FROM `reservations` WHERE `username`='$username'  ";
@@ -31,10 +31,9 @@
       $row = mysqli_fetch_assoc($results);
 
       //$selected = $_POST['accountdelete'];
-      echo "Order $returncar has been returned!<BR><BR>";
+      echo "Order $selected has been deleted!<BR><BR>";
       $conn = mysqli_connect("localhost", "root", "", "autogo");
-      $returned = "returned";
-      $sql = "UPDATE `reservations` SET `option2` = '$returned' WHERE `confirm` = '$returncar'";
+      $sql = "DELETE FROM `reservations` WHERE `confirm` = '$selected'";
       // convirmation order is confirm. we want to  deleted the $selected
       $result = $conn->query($sql);
 
@@ -119,6 +118,71 @@
   .nav-btn {
     margin-right: 16px;
   }
+
+  .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box {
+			width: 750px;
+			height: 300px;
+			border: 2px solid black;
+			background-color: lightgray;
+			padding: 10px;
+			text-align: center;
+		}
+
+#orderdelete {
+  display: inline-block;
+
+  padding: 10px;
+  max-width: 560px;
+  margin: 0 5%;
+  text-align: center;
+}
+
+#returncar {
+  display: inline-block;
+  
+  padding: 10px;
+  max-width: 560px;
+  margin: 0 5%;
+  text-align: center;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+select {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+  background-color: #d60e0e;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 	</style>
 </head>
 </head>
@@ -169,29 +233,27 @@
 
 <!-- Remove a reservation -->
 <form id="orderdelete" name="orderdelete" method="post" action="./orders.php">
+  <div class = "box">
+  <div class="center">
   <div id="orderdelete">
-      <h3>Reservation List:</h3>
-        Select a reservation to cancel
-        <BR>
-        <select name="orderdelete">
-        <?php
-          $conn = mysqli_connect("localhost", "root", "", "autogo");
-          $sql = "SELECT * FROM `reservations` WHERE `username`='$username'  ";
-          $result = $conn->query($sql);
-          foreach($result as $row){?>
-        <option value="<?php echo $row['confirm']; ?>"><?php echo $row['confirm']; ?></option>
-          <?php }?>
-      </select>
-    <input type="submit" name="delete" value="Cancel this Reservation ">
+    <h3>Reservation List:</h3>
+    <h4><b>Select a reservation to cancel</b></h4>
+    <select name="orderdelete">
+      <?php
+      $conn = mysqli_connect("localhost", "root", "", "autogo");
+      $sql = "SELECT * FROM `reservations` WHERE `username`='$username'";
+      $result = $conn->query($sql);
+      foreach($result as $row) {
+      ?>
+      <option value="<?php echo $row['confirm']; ?>"><?php echo $row['confirm']; ?></option>
+      <?php }?>
+    </select>
+    <input type="submit" name="delete" value="Cancel this Reservation">
   </div>
-</form>
-
-<!-- Remove a reservation -->
-<form id="returncar" name="returncar" method="post" action="./orders.php">
+  <!-- remove car -->
   <div id="returncar">
-      <h3>Return Car:</h3>
-        Select a car to return
-        <BR>
+        <br><br><br>
+       <h4> Select a car to return<h4>
         <select name="returncar">
         <?php
           $conn = mysqli_connect("localhost", "root", "", "autogo");
@@ -203,6 +265,9 @@
       </select>
     <input type="submit" name="returncar" value="Return this car ">
   </div>
+          </div>
+          </div>
+</div>
 </form>
 
   <?php
