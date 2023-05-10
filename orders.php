@@ -19,6 +19,11 @@
       $sql = "DELETE FROM `reservations` WHERE `confirm` = '$selected'";
       // convirmation order is confirm. we want to  deleted the $selected
       $result = $conn->query($sql);
+
+      // set cars to available
+      $sql = "UPDATE `cars` SET `available`='yes' WHERE 1";
+      $result = $conn->query($sql);
+
     }
 
 
