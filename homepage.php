@@ -167,10 +167,8 @@
             });
         });
     </script>
-    <div class="our-locations">
-        <h1>Our Locations</h1>
-    </div>
-    <div id="map" class="map"></div>
+    <div class="our-locations"><h1>Our Locations</h1></div>
+    <div id="map"></div>
     <script>
         var map = L.map('map').setView([37.875255, -120.101326], 6);
 

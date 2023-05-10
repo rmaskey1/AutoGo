@@ -187,30 +187,46 @@ input[type="submit"] {
 </head>
 </head>
 <body>
-  <div class="navbar-logo-left-2 wf-section">
-    <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-logo-left-container-2 shadow-three w-nav">
+<div class="navbar-logo-left-2 wf-section">
+      <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-logo-left-container-2 shadow-three w-nav">
       <div class="container-3">
-        <div class="navbar-wrapper-3">
-          <a href="index.php" class="navbar-brand-3 w-nav-brand"><img src="images/autogo_logo-p-500.png" loading="lazy" alt="" class="image-5"></a>
+          <div class="navbar-wrapper-3">
+          <a href="homepage.php" class="navbar-brand-3 w-nav-brand"><img src="autogo_logo.png" loading="lazy" alt="" class="image-5" style="width: 500px;"></a>
           <nav role="navigation" class="nav-menu-wrapper-3 w-nav-menu">
-            <ul role="list" class="nav-menu-two-2 w-list-unstyled">
+              <ul role="list" class="nav-menu-two-2 w-list-unstyled">
               <li>
-                <a href="homepage.php" class="nav-link-3">Home</a>
+                  <a href="homepage.php" class="nav-link-3">Home</a>
               </li>
               <li>
-                <a href="about.php" class="nav-link-3">About</a>
+                  <a href="about.php" class="nav-link-3">About</a>
               </li>
-              <li class="mobile-margin-top-12">
-                <a href="login.php" class="button-2 w-button">Logout</a>
-              </li>
-            </ul>
+              <?php
+                  if (!isset($_SESSION['username'])){
+                  echo
+                      '<li class="mobile-margin-top-12">
+                          <a href="./login.php" class="button-2 w-button">Login</a>
+                          <a href="./create.php" class="button-2 w-button">Sign Up</a>
+                      </li>';
+                  }
+                  else {
+                  echo
+                      '
+                      <li>
+                          <a href="accountInfo.php" class="nav-link-3"><img src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png" style="width: 40px; height: 40px"/></a>
+                      </li>
+                      <li class="mobile-margin-top-12">
+                          <a href="./login.php" class="button-2 w-button">Logout</a>
+                      </li>';
+                  }
+              ?>
+              </ul>
           </nav>
           <div class="menu-button-3 w-nav-button">
-            <div class="w-icon-nav-menu"></div>
+              <div class="w-icon-nav-menu"></div>
           </div>
-        </div>
+          </div>
       </div>
-    </div>
+      </div>
   </div>
 
   <br>
