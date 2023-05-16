@@ -1,10 +1,10 @@
-# Project Title
+# AutoGo
 
 AutoGo is a web-based mock car rental website that emulates the experience of renting a car.
 
 ## Table of Contents
 
-- [Project Title](#project-title)
+- [AutoGo](#project-title)
   - [Table of Contents](#table-of-contents)
   - [About the Project](#about-the-project)
     - [Built With](#built-with)
