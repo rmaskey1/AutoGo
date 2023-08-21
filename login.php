@@ -16,7 +16,7 @@
       $_SESSION['username'] = $username;
 
       //create connection
-      $conn = mysqli_connect("localhost", "root", "", "autogo");
+      $conn = mysqli_connect("localhost", "root", "admin", "autogo");
 
       //Check connection
       if (!$conn) {
